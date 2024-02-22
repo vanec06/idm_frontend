@@ -42,6 +42,7 @@ const mantenimiento = () => {
       console.error('Error en la búsqueda de mantenimiento:', error);
     }
   };
+  
 
   const listarMantenimientos = async () => {
     try {
