@@ -48,7 +48,6 @@ const Login = () => {
         <h1 className="login-title  ">
           <span className="login-title-highlight "> Iniciar sesión</span>
         </h1>
-
         <div className='logo'></div>
 
         <form className="login-form" onSubmit={handleSubmit}>
