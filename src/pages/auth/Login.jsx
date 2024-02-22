@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { RiUserLine, RiLockLine, RiEyeLine, RiEyeOffLine } from 'react-icons/ri';
 import Cookies from 'js-cookie';
-import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [identificacion, setIdentificacion] = useState('');
   const [contraseña, setContraseña] = useState('');
-  const navigate = useNavigate();
-
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,77 +26,180 @@ const Login = () => {
         const data = await response.json();
         console.log("Autenticación exitosa. Token:", data.token);
 
-      Cookies.set("token", data.token, { expires: 1 });
+        Cookies.set("token", data.token, { expires: 1 });
 
-      const redirectTo = localStorage.getItem("redirectTo") || "/";
-      localStorage.removeItem("redirectTo");
-      navigate(redirectTo);
-    } else {
-      const errorData = await response.json();
-      setError(errorData.message);
+        const redirectTo = localStorage.getItem("redirectTo") || "/";
+        localStorage.removeItem("redirectTo");
+        navigate(redirectTo);
+      } else {
+        const errorData = await response.json();
+        setError(errorData.message);
+      }
+    } catch (error) {
+      console.error("Error de red:", error);
+      setError("Error de conexión. Inténtalo de nuevo más tarde.");
     }
-  } catch (error) {
-    console.error("Error de red:", error);
-    setError("Error de conexión. Inténtalo de nuevo más tarde.");
-  }
-};
+  };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="bg-secondary-100 p-8 rounded-xl shadow-2xl w-auto lg:w-[450px]">
-        <h1 className="text-3xl text-center uppercase font-bold tracking-[5px] text-white mb-8">
-          Iniciar <span className="text-primary">sesión</span>
+    <div className="min-h-screen flex items-center justify-center p-4 relative">
+      <div className="img"></div>
+      <div className="login-container">
+        <h1 className="login-title  ">
+          <span className="login-title-highlight "> Iniciar sesión</span>
         </h1>
-        <form className="mb-8" onSubmit={handleSubmit}>
+
+        <div className='logo'></div>
+
+        <form className="login-form" onSubmit={handleSubmit}>
           <div className="relative mb-4">
-          <RiUserLine className="absolute top-1/2 -translate-y-1/2 left-2 text-primary" />
+            <RiUserLine className="login-icon" />
             <input
-              type="int"
+              type="text"
               value={identificacion}
               onChange={(e) => setIdentificacion(e.target.value)}
-              className="py-3 pl-8 pr-4 bg-secondary-900 w-full outline-none rounded-lg"
+              className="login-input"
               placeholder="Identificacion"
             />
           </div>
           <div className="relative mb-8">
-            <RiLockLine className="absolute top-1/2 -translate-y-1/2 left-2 text-primary" />
+            <RiLockLine className="login-icon" />
             <input
               type={showPassword ? "text" : "password"}
               value={contraseña}
               onChange={(e) => setContraseña(e.target.value)}
-              className="py-3 px-8 bg-secondary-900 w-full outline-none rounded-lg"
+              className="login-input"
               placeholder="Contraseña"
             />
             {showPassword ? (
               <RiEyeOffLine
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute top-1/2 -translate-y-1/2 right-2 hover:cursor-pointer text-primary"
+                className="login-toggle-password"
               />
             ) : (
               <RiEyeLine
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute top-1/2 -translate-y-1/2 right-2 hover:cursor-pointer text-primary"
+                className="login-toggle-password"
               />
             )}
           </div>
           <div>
             <button
               type="submit"
-              className="bg-primary text-black uppercase font-bold text-sm w-full py-3 px-4 rounded-lg"
+              className="login-button"
             >
               Ingresar
             </button>
           </div>
         </form>
-        <div className="flex flex-col items-center gap-4">
+        <div className="login-links">
           <Link
             to="/olvide-password"
-            className="hover:text-primary transition-colors"
+            className="login-link"
           >
             ¿Olvidaste tu contraseña?
           </Link>
         </div>
       </div>
+      <style>{`
+    .logo{
+      background-image: url('img/logo.jpg');
+    
+      background-size: contain; /* Ajusta el tamaño del logo para que se ajuste al contenedor */
+      background-repeat: no-repeat; /* Evita la repetición del logo */
+      width: 150px; /* Tamaño deseado del logo */
+      height: 150px; /* Tamaño deseado del logo */
+      margin: auto; /* Centra el logo horizontalmente */
+      margin-bottom: 20px; /* Ajusta el margen inferior según sea necesario */
+    }
+    .img {
+      background-image: url('https://lavozdelaregion.co/wp-content/uploads/2023/09/ENCC-Pitalito.jpg'); /* Ruta de tu imagen de fondo */
+      background-size: cover;
+      background-position: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      z-index: -1; /* Asegura que la imagen de fondo esté detrás de otros elementos */
+    }
+  
+        .login-container {
+          background-image: url('logo.jpg');
+          background-color: #f3f4f4;
+          padding: 32px;
+          border-radius: 16px;
+          box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+          width: 100%;
+          max-width: 400px;
+        }
+
+        .login-title {
+          font-size: 24px;
+          font-weight: bold;
+          color: #333;
+          margin-bottom: 24px;
+          text-align: center;
+        }
+
+        .login-title-highlight {
+          color: #3182ce;
+        }
+
+        .login-form {
+          margin-bottom: 24px;
+        }
+
+        .login-icon {
+          position: absolute;
+          top: 50%;
+          left: 16px;
+          transform: translateY(-50%);
+          color: #3182ce;
+        }
+
+        .login-input {
+          padding: 12px 40px 12px 32px;
+          border-radius: 8px;
+          border: 1px solid #cbd5e0;
+          width: 100%;
+          font-size: 16px;
+        }
+
+        .login-toggle-password {
+          position: absolute;
+          top: 50%;
+          right: 16px;
+          transform: translateY(-50%);
+          cursor: pointer;
+          color: #3182ce;
+        }
+
+        .login-button {
+          background-color: #3182ce;
+          color: white;
+          font-weight: bold;
+          padding: 12px;
+          border-radius: 8px;
+          width: 100%;
+          font-size: 16px;
+          cursor: pointer;
+        }
+
+        .login-links {
+          text-align: center;
+        }
+
+        .login-link {
+          color: #3182ce;
+          text-decoration: none;
+          font-size: 14px;
+        }
+
+        .login-link:hover {
+          text-decoration: underline;
+        }
+      `}</style>
     </div>
   );
 };
