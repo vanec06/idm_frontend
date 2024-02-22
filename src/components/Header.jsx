@@ -14,13 +14,51 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-<header className="bg-customBlue h-[7vh] md:h-[10vh] border-b border-secondary-100 p-8 flex items-center justify-end">
-      <nav className="flex items-center gap-2">
+    <header
+      style={{
+        backgroundColor: "#37474F", 
+        height: "80px",
+        borderBottom: "1px solid #CBD5E0", 
+        padding: "0 20px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "flex-end", // Alineado al extremo derecho
+      }}
+    >
+      <nav
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "20px",
+        }}
+      >
+        {/* Menú de notificaciones */}
         <Menu
           menuButton={
-            <MenuButton className="relative hover:bg-secondary-100 p-2 rounded-lg transition-colors">
-              <RiNotification3Line />
-              <span className="absolute -top-0.5 right-0 bg-primary py-0.5 px-[5px] box-content text-black rounded-full text-[8px] font-bold">
+            <MenuButton
+              style={{
+                position: "relative",
+                padding: "10px",
+                borderRadius: "10px",
+                color: "#fff",
+                cursor: "pointer",
+                backgroundColor: "transparent",
+              }}
+            >
+              <RiNotification3Line style={{ fontSize: "20px" }} />
+              <span
+                style={{
+                  position: "absolute",
+                  top: "-5px",
+                  right: "-5px",
+                  backgroundColor: "#f00",
+                  padding: "3px 6px",
+                  borderRadius: "50%",
+                  fontSize: "10px",
+                  fontWeight: "bold",
+                  color: "#fff",
+                }}
+              >
                 2
               </span>
             </MenuButton>
@@ -31,82 +69,89 @@ const Header = () => {
           arrowClassName="bg-secondary-100"
           menuClassName="bg-secondary-100 p-4"
         >
-          <h1 className="text-gray-300 text-center font-medium">
-            Notificaciones (2)
+          {/* Contenido del menú de notificaciones */}
+          <h1
+            style={{
+              color: "#ccc",
+              textAlign: "center",
+              fontWeight: "bold",
+              fontSize: "16px",
+            }}
+          >
+            Notificaciones (1)
           </h1>
-          <hr className="my-6 border-gray-500" />
-          <MenuItem className="p-0 hover:bg-transparent">
+          <hr style={{ margin: "6px 0", borderColor: "#ccc" }} />
+          <MenuItem
+            style={{ padding: "0", backgroundColor: "transparent" }}
+          >
+            {/* Contenido de una notificación */}
             <Link
               to="/"
-              className="text-gray-300 flex flex-1 items-center gap-4 py-2 px-4 hover:bg-secondary-900 transition-colors rounded-lg"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                color: "#ccc",
+                gap: "10px",
+                padding: "10px 20px",
+                borderRadius: "5px",
+                textDecoration: "none",
+              }}
             >
               <img
                 src="https://img.freepik.com/foto-gratis/feliz-optimista-guapo-gerente-ventas-latina-apuntando-lado-mirando-camara_1262-12679.jpg"
-                className="w-8 h-8 object-cover rounded-full"
+                alt="Profile"
+                style={{
+                  width: "40px",
+                  height: "40px",
+                  borderRadius: "50%",
+                  objectFit: "cover",
+                }}
               />
-              <div className="text-sm flex flex-col">
-                <div className="flex items-center justify-between gap-4">
-                  <span>Jorge Luis Trejo</span>{" "}
-                  <span className="text-[8px]">21/10/2022</span>
+              <div style={{ flex: "1" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <span>Tostadora</span>{" "}
+                  <span style={{ fontSize: "10px" }}><><br /><br /></> 21/10/2022</span>
                 </div>
-                <p className="text-gray-500 text-xs">
-                  Lorem ipsum dolor sit amet...
+                <p style={{ color: "#999", fontSize: "10px" }}>
+                  
                 </p>
               </div>
             </Link>
           </MenuItem>
-          <MenuItem className="p-0 hover:bg-transparent">
-            <Link
-              to="/"
-              className="text-gray-300 flex flex-1 items-center gap-4 py-2 px-4 hover:bg-secondary-900 transition-colors rounded-lg"
-            >
-              <RiThumbUpLine className="p-2 bg-blue-200 text-blue-700 box-content rounded-full" />
-              <div className="text-sm flex flex-col">
-                <div className="flex items-center justify-between gap-4">
-                  <span>Nuevo like</span>{" "}
-                  <span className="text-[8px]">21/10/2022</span>
-                </div>
-                <p className="text-gray-500 text-xs">
-                  A Jorge Trejo le gusta tu pub...
-                </p>
-              </div>
-            </Link>
-          </MenuItem>
-          <MenuItem className="p-0 hover:bg-transparent">
-            <Link
-              to="/"
-              className="text-gray-300 flex flex-1 items-center gap-4 py-2 px-4 hover:bg-secondary-900 transition-colors rounded-lg"
-            >
-              <RiChat3Line className="p-2 bg-yellow-200 text-yellow-700 box-content rounded-full" />
-              <div className="text-sm flex flex-col">
-                <div className="flex items-center justify-between gap-4">
-                  <span>Nuevo comentario</span>{" "}
-                  <span className="text-[8px]">21/10/2022</span>
-                </div>
-                <p className="text-gray-500 text-xs">
-                  Jorge Trejo ha comentado tu...
-                </p>
-              </div>
-            </Link>
-          </MenuItem>
-          <hr className="my-6 border-gray-500" />
-          <MenuItem className="p-0 hover:bg-transparent flex justify-center cursor-default">
-            <Link
-              to="/"
-              className="text-gray-400 text-sm hover:text-white transition-colors"
-            >
-              Todas las notificaciones
-            </Link>
-          </MenuItem>
+          {/* Resto de notificaciones */}
         </Menu>
+        {/* Menú de perfil */}
         <Menu
           menuButton={
-            <MenuButton className="flex items-center gap-x-2 hover:bg-secondary-100 p-2 rounded-lg transition-colors">
+            <MenuButton
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "5px",
+                padding: "10px",
+                borderRadius: "10px",
+                color: "#fff",
+                cursor: "pointer",
+                backgroundColor: "transparent",
+              }}
+            >
               <img
                 src="https://img.freepik.com/foto-gratis/feliz-optimista-guapo-gerente-ventas-latina-apuntando-lado-mirando-camara_1262-12679.jpg"
-                className="w-6 h-6 object-cover rounded-full"
+                alt="Profile"
+                style={{
+                  width: "30px",
+                  height: "30px",
+                  borderRadius: "50%",
+                  objectFit: "cover",
+                }}
               />
-              <span>Brayan Cortes</span>
+              <span>Administrador </span>
               <RiArrowDownSLine />
             </MenuButton>
           }
@@ -116,34 +161,68 @@ const Header = () => {
           transition
           menuClassName="bg-secondary-100 p-4"
         >
-          <MenuItem className="p-0 hover:bg-transparent">
+          {/* Contenido del menú de perfil */}
+          <MenuItem
+            style={{ padding: "0", backgroundColor: "transparent" }}
+          >
             <Link
               to="/perfil"
-              className="rounded-lg transition-colors text-gray-300 hover:bg-secondary-900 flex items-center gap-x-4 py-2 px-6 flex-1"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                color: "#ccc",
+                gap: "10px",
+                padding: "10px 20px",
+                borderRadius: "5px",
+                textDecoration: "none",
+              }}
             >
               <img
                 src="https://img.freepik.com/foto-gratis/feliz-optimista-guapo-gerente-ventas-latina-apuntando-lado-mirando-camara_1262-12679.jpg"
-                className="w-8 h-8 object-cover rounded-full"
+                alt="Profile"
+                style={{
+                  width: "40px",
+                  height: "40px",
+                  borderRadius: "50%",
+                  objectFit: "cover",
+                }}
               />
-              <div className="flex flex-col text-sm">
-                <span className="text-sm">Administrador</span>
-                <span className="text-xs text-gray-500">brayancortes@gmail.com</span>
+              <div style={{ flex: "1" }}>
+                <span style={{ fontSize: "14px" }}>Administrador</span>
+                <span style={{ color: "#999", fontSize: "10px" }}>
+                  admin@gmail.com
+                </span>
               </div>
             </Link>
           </MenuItem>
-          <hr className="my-4 border-gray-500" />
-          <MenuItem className="p-0 hover:bg-transparent">
+          <hr style={{ margin: "4px 0", borderColor: "#ccc" }} />
+          {/* Enlaces del menú de perfil */}
+          <MenuItem
+            style={{ padding: "0", backgroundColor: "transparent" }}
+          >
             <Link
               to="/configuracion"
-              className="rounded-lg transition-colors text-gray-300 hover:bg-secondary-900 flex items-center gap-x-4 py-2 px-6 flex-1"
+              style={{
+                color: "#ccc",
+                textDecoration: "none",
+                padding: "10px 20px",
+                borderRadius: "5px",
+              }}
             >
               <RiSettings3Line /> Configuración
             </Link>
           </MenuItem>
-          <MenuItem className="p-0 hover:bg-transparent">
+          <MenuItem
+            style={{ padding: "0", backgroundColor: "transparent" }}
+          >
             <Link
               to="/cerrar-sesion"
-              className="rounded-lg transition-colors text-gray-300 hover:bg-secondary-900 flex items-center gap-x-4 py-2 px-6 flex-1"
+              style={{
+                color: "#ccc",
+                textDecoration: "none",
+                padding: "10px 20px",
+                borderRadius: "5px",
+              }}
             >
               <RiLogoutCircleRLine /> Cerrar sesión
             </Link>
@@ -155,3 +234,4 @@ const Header = () => {
 };
 
 export default Header;
+

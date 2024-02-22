@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
+import MUIDataTable from "mui-datatables";
 
 const Ambiente = () => {
   const [id_ambiente, setid_ambiente] = useState('');
   const [nombre, setnombre] = useState('');
-
   const [ambientes, setAmbientes] = useState([]);
   const [selectedAmbiente, setSelectedAmbiente] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
-
   const [errors, setErrors] = useState([]);
-
 
   useEffect(() => {
     listarAmbientes();
@@ -88,15 +86,11 @@ const Ambiente = () => {
       setErrors(responseData.errors);
     } else {
       closeModal();
-
     }
-    
-    console.log("DATA REGISTER: ", responseData.errors);
 
     listarAmbientes();
     setid_ambiente('');
     setnombre('');
-    // closeModal();
   };
 
   const handleActualizarAmbiente = async () => {
@@ -128,18 +122,52 @@ const Ambiente = () => {
     listarAmbientes();
   };
 
+  const columns = [
+    {
+      name: "id_ambiente",
+      label: "ID",
+    },
+    {
+      name: "nombre",
+      label: "Nombre",
+    },
+    {
+      name: "acciones",
+      label: "Acciones",
+      options: {
+        customBodyRender: (value, tableMeta, updateValue) => {
+          const ambiente = ambientes[tableMeta.rowIndex];
+          return (
+            <div>
+              <button onClick={() => openModal(ambiente)}>
+                <FaEdit className="text-orange-400 text-xl" />
+              </button>
+            </div>
+          );
+        },
+      },
+    },
+  ];
+
+  const options = {
+    filterType: 'checkbox',
+    selectableRows: false,
+    responsive: 'standard',
+    download: false,
+    print: false,
+    viewColumns: false,
+    pagination: false,
+    elevation: 0,
+    onRowClick: (rowData) => {
+      const ambiente = ambientes[rowData[0]];
+      openModal(ambiente);
+    },
+  };
+
   return (
     <div>
       <h2 className="text-black text-3xl font-bold mb-5 px-6 w-full">Lista de Ambientes</h2>
       <div className='w-full h-20 bg-customBlue flex items-center justify-between px-4'>
-        <div>
-          <input
-            type="text"
-            placeholder="Buscar por ID de Ambiente"
-            className="w-48 h-10 border border-gray-300 rounded px-3 py-2"
-            onChange={(e) => buscarAmbientes(e.target.value)}
-          />
-        </div>
         <div>
           <button className='text-white w-40 h-10 bg-green-600 rounded-md' onClick={() => openModal(null)}>
             Registrar
@@ -147,32 +175,12 @@ const Ambiente = () => {
         </div>
       </div>
       <div className="mt-8 mx-6">
-        <div className="overflow-x-auto">
-        </div>
-        <table className="w-3/5 border-none shadow-sm overflow-hidden mx-auto">
-          <thead className="bg-customBlue text-white">
-            <tr>
-              <th className="py-2 px-3 text-sm">ID</th>
-              <th className="py-2 px-3 text-sm">Nombre</th>
-              <th className="py-2 px-3 text-sm">Acciones</th>
-            </tr>
-          </thead>
-          <tbody className="text-sm text-black bg-white divide-y divide-gray-200">
-            {ambientes.map((ambiente) => (
-              <tr key={ambiente.id_ambiente}>
-                <td className="py-1 px-3">{ambiente.id_ambiente}</td>
-                <td className="py-1 px-3">{ambiente.nombre}</td>
-                <td className="py-1 px-3">
-                  <div className="flex items-center">
-                    <button onClick={() => openModal(ambiente)} className="text-white px-2 py-1 rounded">
-                      <FaEdit className="text-orange-400 text-xl" />
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <MUIDataTable
+          title={"Ambientes"}
+          data={ambientes.map(ambiente => [ambiente.id_ambiente, ambiente.nombre, null])}
+          columns={columns}
+          options={options}
+        />
       </div>
       <Modal
         isOpen={isOpen}
