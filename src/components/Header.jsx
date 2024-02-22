@@ -16,10 +16,11 @@ const Header = () => {
   return (
     <header
       style={{
-        backgroundColor: "#37474F", 
+        backgroundColor: "#2a5d84", 
         height: "80px",
+        width:"107em",
         borderBottom: "1px solid #CBD5E0", 
-        padding: "0 20px",
+    
         display: "flex",
         alignItems: "center",
         justifyContent: "flex-end", // Alineado al extremo derecho

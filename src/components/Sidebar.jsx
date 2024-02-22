@@ -81,7 +81,8 @@ const styles = {
   sidebarOpen: {
     width: "250px",
     transition: "width 0.3s ease-in-out",
-    backgroundColor: "#37474F", // Cambiar color de fondo del sidebar
+    backgroundColor: "   #2a5d84 ", // Cambiar color de fondo del sidebar
+   
   },
   sidebarClosed: {
     width: "50px",
