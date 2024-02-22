@@ -20,6 +20,7 @@ const Mantenimiento = () => {
   const buscarMantenimientos = async (id_mantenimiento) => {
     // Código para buscar mantenimientos...
   };
+  
 
   const listarMantenimientos = async () => {
     // Código para listar mantenimientos...
