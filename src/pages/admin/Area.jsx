@@ -149,6 +149,7 @@ const Area = () => {
     {
       name: "acciones",
       label: "Acciones",
+      
       options: {
         customBodyRender: (value, tableMeta, updateValue) => {
           const area = areas[tableMeta.rowIndex];
@@ -168,7 +169,6 @@ const Area = () => {
     filterType: 'checkbox',
     selectableRows: false,
     responsive: 'standard',
-    download: false,
     print: false,
     viewColumns: false,
     pagination: false,
@@ -197,6 +197,7 @@ const Area = () => {
           options={options}
         />
       </div>
+
       <Modal
         isOpen={isOpen}
         onRequestClose={closeModal}
@@ -283,3 +284,5 @@ const Area = () => {
 };
 
 export default Area;
+
+
