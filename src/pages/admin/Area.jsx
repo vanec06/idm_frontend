@@ -267,6 +267,7 @@ const Area = () => {
                 onClick={handleRegistrarArea}
               >
                 Registrar
+                
               </button>
             </form>
             <button
