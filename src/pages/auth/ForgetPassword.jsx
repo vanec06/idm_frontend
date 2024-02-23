@@ -5,9 +5,13 @@ import { RiMailLine } from "react-icons/ri";
 const ForgetPassword = () => {
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
+
+<div className="img"></div>
+
       <div className="forget-password-container">
         <h1 className="forget-password-title">
-          Recuperar <span className="forget-password-title-highlight">contraseña</span>
+          <span className="forget-password-title-highlight "> Recuperar contraseña</span>
+          <div className='logo'></div>
         </h1>
         <form className="forget-password-form">
           <div className="relative mb-8">
@@ -40,6 +44,26 @@ const ForgetPassword = () => {
         </div>
       </div>
       <style>{`
+          .logo{
+            background-image: url('img/logo.jpg');
+            background-size: contain; /* Ajusta el tamaño del logo para que se ajuste al contenedor */
+            background-repeat: no-repeat; /* Evita la repetición del logo */
+            width: 150px; /* Tamaño deseado del logo */
+            height: 150px; /* Tamaño deseado del logo */
+            margin: auto; /* Centra el logo horizontalmente */
+            margin-bottom: 20px; /* Ajusta el margen inferior según sea necesario */
+          }
+          .img {
+            background-image: url('https://lavozdelaregion.co/wp-content/uploads/2023/09/ENCC-Pitalito.jpg'); /* Ruta de tu imagen de fondo */
+            background-size: cover;
+            background-position: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            z-index: -1; /* Asegura que la imagen de fondo esté detrás de otros elementos */
+          }
         .forget-password-container {
           background-color: #f3f4f6;
           padding: 32px;
@@ -54,6 +78,7 @@ const ForgetPassword = () => {
           font-weight: bold;
           color: #333;
           margin-bottom: 24px;
+          text-align: center;
         }
 
         .forget-password-title-highlight {
