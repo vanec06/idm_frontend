@@ -28,7 +28,7 @@ const Login = () => {
 
         Cookies.set("token", data.token, { expires: 1 });
 
-        const redirectTo = localStorage.getItem("redirectTo") || "/";
+        const redirectTo = localStorage.getItem("redirectTo") || "/admin";
         localStorage.removeItem("redirectTo");
         navigate(redirectTo);
       } else {

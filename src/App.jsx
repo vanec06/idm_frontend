@@ -24,9 +24,9 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Login />} />
         <Route path="/olvide-password" element={<ForgetPassword />} />
-        <Route path="/" element={<LayoutAdmin />}>
+        <Route path="/admin" element={<LayoutAdmin />}>
           <Route index element={<Home />} />
           <Route path="perfil" element={<Profile />} />
           <Route path="chat" element={<Chat />} />
