@@ -50,7 +50,6 @@ const Login = () => {
         <h1 className="login-title  ">
           <span className="login-title-highlight "> Iniciar sesión</span>
         </h1>
-
         <div className='logo'></div>
 
         <form className="login-form" onSubmit={handleSubmit}>
@@ -106,6 +105,7 @@ const Login = () => {
       <style>{`
     .logo{
       background-image: url('img/logo.jpg');
+    
       background-size: contain; /* Ajusta el tamaño del logo para que se ajuste al contenedor */
       background-repeat: no-repeat; /* Evita la repetición del logo */
       width: 150px; /* Tamaño deseado del logo */
