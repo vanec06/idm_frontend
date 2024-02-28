@@ -162,13 +162,14 @@ const Area = () => {
           );
         },
       },
-    },
+    }
   ];
-
+  
   const options = {
     filterType: 'checkbox',
-    selectableRows: false,
+    selectableRows: 'none', // Opciones: 'multiple' | 'single' | 'none'
     responsive: 'standard',
+    download: true,
     print: false,
     viewColumns: false,
     pagination: false,
@@ -178,6 +179,7 @@ const Area = () => {
       openModal(area);
     },
   };
+  
 
   return (
     <div>
@@ -200,7 +202,7 @@ const Area = () => {
 
       <Modal
         isOpen={isOpen}
-        onRequestClose={closeModal}
+        onRequestClose={Modal}
         contentLabel="Modal Área"
         className="fixed inset-0 flex items-center justify-center"
         overlayClassName="fixed inset-0 bg-black bg-opacity-50"
@@ -243,8 +245,16 @@ const Area = () => {
               >
                 Actualizar Área
               </button>
+
+              <button
+              className="bg-gray-500 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded mt-4"
+              onClick={closeModal}
+            >
+              Cancelar
+            </button>
             </form>
           </div>
+          
         ) : (
           <div className="bg-white w-2/4 p-6 rounded shadow-lg grid grid-cols-2 gap-4">
             <h2 className="text-xl font-bold mb-4 text-stone-950">Registrar Área</h2>
@@ -270,13 +280,13 @@ const Area = () => {
                 Registrar
                 
               </button>
-            </form>
-            <button
-              className="bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded mt-4"
+              <button
+              className="bg-gray-500 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded mt-4"
               onClick={closeModal}
             >
               Cancelar
             </button>
+            </form>
           </div>
         )}
       </Modal>

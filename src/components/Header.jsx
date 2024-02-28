@@ -16,11 +16,8 @@ const Header = () => {
   return (
     <header
       style={{
-        backgroundColor: "#2a5d84", 
-        height: "80px",
-        width:"107em",
-        borderBottom: "1px solid #CBD5E0", 
-    
+        backgroundColor: "#37474F", 
+        height: "100px",
         display: "flex",
         alignItems: "center",
         justifyContent: "flex-end", // Alineado al extremo derecho
@@ -64,11 +61,7 @@ const Header = () => {
               </span>
             </MenuButton>
           }
-          align="end"
-          arrow
-          transition
-          arrowClassName="bg-secondary-100"
-          menuClassName="bg-secondary-100 p-4"
+          align="end" arrowClassName="bg-secondary-100" menuClassName="bg-secondary-100 p-4"
         >
           {/* Contenido del menú de notificaciones */}
           <h1
@@ -190,7 +183,7 @@ const Header = () => {
               />
               <div style={{ flex: "1" }}>
                 <span style={{ fontSize: "14px" }}>Administrador</span>
-                <span style={{ color: "#999", fontSize: "10px" }}>
+                <span style={{ color: "#999", fontSize: "10px" }}> <br />
                   admin@gmail.com
                 </span>
               </div>
@@ -205,7 +198,6 @@ const Header = () => {
               to="/configuracion"
               style={{
                 color: "#ccc",
-                textDecoration: "none",
                 padding: "10px 20px",
                 borderRadius: "5px",
               }}
@@ -216,17 +208,6 @@ const Header = () => {
           <MenuItem
             style={{ padding: "0", backgroundColor: "transparent" }}
           >
-            <Link
-              to="/cerrar-sesion"
-              style={{
-                color: "#ccc",
-                textDecoration: "none",
-                padding: "10px 20px",
-                borderRadius: "5px",
-              }}
-            >
-              <RiLogoutCircleRLine /> Cerrar sesión
-            </Link>
           </MenuItem>
         </Menu>
       </nav>

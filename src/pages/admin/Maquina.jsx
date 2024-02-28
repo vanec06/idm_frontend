@@ -45,7 +45,7 @@ const Maquina = () => {
     }
   };
 
-  const buscarMaquinas = async (id_maquina) => {
+  const listarMaquinas = async (id_maquina) => {
     try {
       const fetchData = async () => {
         try {
@@ -249,21 +249,21 @@ const Maquina = () => {
   };
 
   const columns = [
-    { name: 'ID', label: 'ID' },
-    { name: 'Nombre', label: 'Nombre' },
-    { name: 'Marca', label: 'Marca' },
-    { name: 'Placa', label: 'Placa' },
-    { name: 'Modelo', label: 'Modelo' },
-    { name: 'Cantidad', label: 'Cantidad' },
-    { name: 'Manual', label: 'Manual' },
-    { name: 'Serial', label: 'Serial' },
-    { name: 'Imagen', label: 'Imagen' },
-    { name: 'Descripción', label: 'Descripción' },
-    { name: 'Estado', label: 'Estado' },
-    { name: 'Nombre Usuario', label: 'Nombre Usuario' },
-    { name: 'Nombre Área', label: 'Nombre Área' },
-    { name: 'Nombre Ambiente', label: 'Nombre Ambiente' },
-    { name: 'Estado Máquina', label: 'Estado Máquina' },
+    { name: 'id_maquina', label: 'ID' },
+    { name: 'nombre', label: 'Nombre' },
+    { name: 'marca', label: 'Marca' },
+    { name: 'placa', label: 'Placa' },
+    { name: 'modelo', label: 'Modelo' },
+    { name: 'cantidad', label: 'Cantidad' },
+    { name: 'manual', label: 'Manual' },
+    { name: 'serial', label: 'Serial' },
+    { name: 'imagen', label: 'Imagen' },
+    { name: 'descripción', label: 'Descripción' },
+    { name: 'estado', label: 'Estado' },
+    { name: 'id_usuario', label: 'Nombre Usuario' },
+    { name: 'id_area', label: 'Nombre Área' },
+    { name: 'id_ambiente', label: 'Nombre Ambiente' },
+    { name: 'estado_mquina', label: 'Estado Máquina' },
     {
       name: 'Acciones',
       label: 'Acciones',
@@ -286,6 +286,7 @@ const Maquina = () => {
     filterType: 'checkbox',
     responsive: 'stacked',
     selectableRows: 'none',
+    responsive: 'standard',
     onRowClick: (rowData) => {
       const maquina = maquinas[rowData[0]];
       openModal(maquina);

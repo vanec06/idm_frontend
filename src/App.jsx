@@ -9,11 +9,8 @@ import ForgetPassword from "./pages/auth/ForgetPassword";
 // Pages admin
 import Home from "./pages/admin/Home";
 import Profile from "./pages/admin/Profile";
-import Chat from "./pages/admin/Chat";
 import Error404 from "./pages/Error404";
-import Tickets from "./pages/admin/CardUsu";
 import Usuario from "./pages/admin/Usuario";
-import Nmantenimiento from "./pages/admin/Nmantenimiento";
 import Ambiente from "./pages/admin/Ambiente";
 import Area from "./pages/admin/Area";
 import Mantenimiento from "./pages/admin/mantenimiento";
@@ -29,10 +26,7 @@ function App() {
         <Route path="/" element={<LayoutAdmin />}>
           <Route index element={<Home />} />
           <Route path="perfil" element={<Profile />} />
-          <Route path="chat" element={<Chat />} />
-          <Route path="tickets" element={<Tickets />} />
           <Route path="crudUsuario" element={<Usuario />} />
-          <Route path="Nmantenimiento" element={<Nmantenimiento />} />
           <Route path="ambiente" element={<Ambiente />} />
           <Route path="area" element={<Area />} />
           <Route path="mantenimiento" element={<Mantenimiento />} />
