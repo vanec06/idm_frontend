@@ -39,11 +39,6 @@ const Sidebar = () => {
           </Link>
         </li>
         <li>
-          <Link to="/Nmantenimiento" style={styles.menuItem}>
-            <FaBell style={styles.menuIcon} /> Notificacion
-          </Link>
-        </li>
-        <li>
           <Link to="/ambiente" style={styles.menuItem}>
             <FaLeaf style={styles.menuIcon} /> Ambiente
           </Link>
@@ -58,19 +53,16 @@ const Sidebar = () => {
             <FaTools style={styles.menuIcon} /> Mantenimiento
           </Link>
         </li>
-        <li>
-          {/* <Link to="/tickets" style={styles.menuItem}>
-            <RiCustomerService2Line style={styles.menuIcon} /> Soporte técnico
-          </Link> */}
-        </li>
+
       </ul>
       <div style={styles.logoutContainer}>
         <Link
           to="/login"
           onClick={handleLogout}
-          style={styles.logoutLink}
+          
+          style= {styles.logoutLink}
         >
-          <RiLogoutCircleRLine style={styles.menuIcon} /> Cerrar sesión
+         <RiLogoutCircleRLine style={styles.menuIcon} /> Cerrar sesión
         </Link>
       </div>
     </div>
@@ -79,12 +71,6 @@ const Sidebar = () => {
 
 const styles = {
   sidebarOpen: {
-    width: "250px",
-    transition: "width 0.3s ease-in-out",
-    backgroundColor: "#37474F", // Cambiar color de fondo del sidebar
-  },
-  sidebarClosed: {
-    width: "50px",
     transition: "width 0.3s ease-in-out",
     backgroundColor: "#37474F", // Cambiar color de fondo del sidebar
   },

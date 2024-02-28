@@ -151,9 +151,9 @@ const Ambiente = () => {
 
   const options = {
     filterType: 'checkbox',
-    selectableRows: false,
+    selectableRows: 'none', // Opciones: 'multiple' | 'single' | 'none'
     responsive: 'standard',
-    download: false,
+    download: true,
     print: false,
     viewColumns: false,
     pagination: false,
@@ -163,6 +163,7 @@ const Ambiente = () => {
       openModal(ambiente);
     },
   };
+  
 
   return (
     <div>
@@ -184,7 +185,7 @@ const Ambiente = () => {
       </div>
       <Modal
         isOpen={isOpen}
-        onRequestClose={closeModal}
+        onRequestClose={Modal}
         contentLabel="Modal Ambiente"
         className="fixed inset-0 flex items-center justify-center"
         overlayClassName="fixed inset-0 bg-black bg-opacity-50"
@@ -226,6 +227,13 @@ const Ambiente = () => {
               >
                 Actualizar Ambiente
               </button>
+
+              <button
+              className="bg-gray-500 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded mt-4"
+              onClick={closeModal}
+            >
+              Cancelar
+            </button>
             </form>
           </div>
         ) : (
@@ -252,13 +260,13 @@ const Ambiente = () => {
               >
                 Registrar
               </button>
-            </form>
-            <button
-              className="bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded"
+              <button
+              className="bg-gray-500 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded mt-4"
               onClick={closeModal}
             >
               Cancelar
             </button>
+            </form>
           </div>
         )}
       </Modal>
