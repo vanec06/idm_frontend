@@ -42,11 +42,17 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
+    <div className="min-h-screen flex items-center justify-center p-4 relative">
+
+      <div className="img"></div>
+      
       <div className="login-container">
-        <h1 className="login-title">
-          Iniciar <span className="login-title-highlight">sesión</span>
+        <h1 className="login-title  ">
+          <span className="login-title-highlight "> Iniciar sesión</span>
         </h1>
+
+        <div className='logo'></div>
+
         <form className="login-form" onSubmit={handleSubmit}>
           <div className="relative mb-4">
             <RiUserLine className="login-icon" />
@@ -98,8 +104,30 @@ const Login = () => {
         </div>
       </div>
       <style>{`
+    .logo{
+      background-image: url('img/logo.jpg');
+      background-size: contain; /* Ajusta el tamaño del logo para que se ajuste al contenedor */
+      background-repeat: no-repeat; /* Evita la repetición del logo */
+      width: 150px; /* Tamaño deseado del logo */
+      height: 150px; /* Tamaño deseado del logo */
+      margin: auto; /* Centra el logo horizontalmente */
+      margin-bottom: 20px; /* Ajusta el margen inferior según sea necesario */
+    }
+    .img {
+      background-image: url('https://lavozdelaregion.co/wp-content/uploads/2023/09/ENCC-Pitalito.jpg'); /* Ruta de tu imagen de fondo */
+      background-size: cover;
+      background-position: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      z-index: -1; /* Asegura que la imagen de fondo esté detrás de otros elementos */
+    }
+  
         .login-container {
-          background-color: #f3f4f6;
+          background-image: url('logo.jpg');
+          background-color: #f3f4f4;
           padding: 32px;
           border-radius: 16px;
           box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
@@ -112,6 +140,7 @@ const Login = () => {
           font-weight: bold;
           color: #333;
           margin-bottom: 24px;
+          text-align: center;
         }
 
         .login-title-highlight {

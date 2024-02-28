@@ -149,6 +149,7 @@ const Area = () => {
     {
       name: "acciones",
       label: "Acciones",
+      
       options: {
         customBodyRender: (value, tableMeta, updateValue) => {
           const area = areas[tableMeta.rowIndex];
