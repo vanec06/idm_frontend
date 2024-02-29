@@ -72,7 +72,7 @@ const Sidebar = () => {
 const styles = {
   sidebarOpen: {
     transition: "width 0.3s ease-in-out",
-    backgroundColor: "#37474F", // Cambiar color de fondo del sidebar
+    backgroundColor: "#2A5D84", // Cambiar color de fondo del sidebar
   },
   logoContainer: {
     padding: "20px",

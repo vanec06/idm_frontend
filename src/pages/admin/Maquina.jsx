@@ -250,7 +250,7 @@ const Maquina = () => {
 
   const columns = [
     { name: 'id_maquina', label: 'ID' },
-    { name: 'nombre', label: 'Nombre' },
+    { name: 'nombre_maquina', label: 'Nombre' },
     { name: 'marca', label: 'Marca' },
     { name: 'placa', label: 'Placa' },
     { name: 'modelo', label: 'Modelo' },
@@ -260,10 +260,10 @@ const Maquina = () => {
     { name: 'imagen', label: 'Imagen' },
     { name: 'descripción', label: 'Descripción' },
     { name: 'estado', label: 'Estado' },
-    { name: 'id_usuario', label: 'Nombre Usuario' },
-    { name: 'id_area', label: 'Nombre Área' },
-    { name: 'id_ambiente', label: 'Nombre Ambiente' },
-    { name: 'estado_mquina', label: 'Estado Máquina' },
+    { name: 'nombre_usuario', label: 'Nombre Usuario' },
+    { name: 'nombre_area', label: 'Nombre Área' },
+    { name: 'nombre_ambiente', label: 'Nombre Ambiente' },
+    { name: 'estado_maquina', label: 'Estado Máquina' },
     {
       name: 'Acciones',
       label: 'Acciones',
@@ -335,21 +335,23 @@ const Maquina = () => {
                     id="id_maquina"
                     value={selectedMaquina?.id_maquina || ''}
                     disabled
-                    className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+                    className="w-full border border-gray-300 rounded px-3 py-2 mt-1 "
                   />
                 </div>
                 <div className="mb-4">
                   <label htmlFor="nombre_maquina" className="block text-sm font-bold text-gray-700">
-                    Nombre:
+                    Nombre: 
+                    
                   </label>
                   <input
                     type="text"
                     id="nombre_maquina"
                     value={nombre}
                     onChange={(e) => setNombre(e.target.value)}
-                    className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+                    className="w-full border border-gray-300 rounded px-3 py-2 mt-1 text-black"
                     placeholder="Nuevo Nombre"
                   />
+                  
                 </div>
                 <div className="mb-4">
                   <label htmlFor="marca" className="block text-sm font-bold text-gray-700">
@@ -360,7 +362,7 @@ const Maquina = () => {
                     id="marca"
                     value={marca}
                     onChange={(e) => setMarca(e.target.value)}
-                    className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+                    className="w-full border border-gray-300 rounded px-3 py-2 mt-1 text-black"
                     placeholder="Nueva Marca"
                   />
                 </div>
@@ -373,7 +375,7 @@ const Maquina = () => {
                     id="placa"
                     value={placa}
                     onChange={(e) => setPlaca(e.target.value)}
-                    className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+                    className="w-full border border-gray-300 rounded px-3 py-2 mt-1 text-black"
                     placeholder="Nueva Placa"
                   />
                 </div>
@@ -389,7 +391,7 @@ const Maquina = () => {
                   id="modelo"
                   value={modelo}
                   onChange={(e) => setModelo(e.target.value)}
-                  className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+                  className="w-full border border-gray-300 rounded px-3 py-2 mt-1 text-black"
                   placeholder="Nuevo Modelo"
                 />
               </div>
@@ -402,7 +404,7 @@ const Maquina = () => {
                   id="cantidad"
                   value={cantidad}
                   onChange={(e) => setCantidad(e.target.value)}
-                  className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+                  className="w-full border border-gray-300 rounded px-3 py-2 mt-1 text-black"
                   placeholder="Nueva Cantidad"
                 />
               </div>
@@ -415,7 +417,7 @@ const Maquina = () => {
                   id="manual"
                   value={manual}
                   onChange={(e) => handleManualChange(e)}
-                  className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+                  className="w-full border border-gray-300 rounded px-3 py-2 mt-1 "
                   placeholder="Nuevo Manual"
                 />
               </div>
@@ -428,7 +430,7 @@ const Maquina = () => {
                   id="serial"
                   value={serial}
                   onChange={(e) => setSerial(e.target.value)}
-                  className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+                  className="w-full border border-gray-300 rounded px-3 py-2 mt-1 text-black"
                   placeholder="Nuevo Serial"
                 />
               </div>
@@ -453,7 +455,7 @@ const Maquina = () => {
                   id="descripcion"
                   value={descripcion}
                   onChange={(e) => setDescripcion(e.target.value)}
-                  className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+                  className="w-full border border-gray-300 rounded px-3 py-2 mt-1 text-black"
                   placeholder="Nueva Descripción"
                 />
               </div>
@@ -466,7 +468,7 @@ const Maquina = () => {
                   id="estado_maquina"
                   value={estado}
                   onChange={(e) => setEstado(e.target.value)}
-                  className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+                  className="w-full border border-gray-300 rounded px-3 py-2 mt-1 text-black"
                   placeholder="Nuevo Estado"
                 />
               </div>
@@ -479,7 +481,7 @@ const Maquina = () => {
                   id="nombre_usuario"
                   value={id_usuario}
                   onChange={(e) => setid_usuario(e.target.value)}
-                  className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+                  className="w-full border border-gray-300 rounded px-3 py-2 mt-1 text-black"
                   placeholder="Nuevo ID Usuario Máquina"
                 />
               </div>
@@ -492,7 +494,7 @@ const Maquina = () => {
                   id="nombre_area"
                   value={id_area}
                   onChange={(e) => setid_area(e.target.value)}
-                  className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+                  className="w-full border border-gray-300 rounded px-3 py-2 mt-1 text-black"
                   placeholder="Nuevo ID Área"
                 />
               </div>
@@ -505,7 +507,7 @@ const Maquina = () => {
                   id="nombre_ambiente"
                   value={id_ambiente}
                   onChange={(e) => setid_ambiente(e.target.value)}
-                  className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+                  className="w-full border border-gray-300 rounded px-3 py-2 mt-1 text-black"
                   placeholder="Nuevo ID Ambiente"
                 />
               </div>
@@ -518,7 +520,7 @@ const Maquina = () => {
                   id="estado_maquina"
                   value={estado}
                   onChange={(e) => setestado_maquina(e.target.value)}
-                  className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+                  className="w-full border border-gray-300 rounded px-3 py-2 mt-1 text-black"
                   placeholder="Nuevo Estado Máquina"
                 />
               </div>
@@ -537,18 +539,19 @@ const Maquina = () => {
             <form>
               <div className="float-left bg-white w-4/4 p-6 rounded shadow-lg grid grid-cols-2 gap-4">
                 <div className="mb-4">
-                  <label htmlFor="nombre" className="block text-sm font-bold text-gray-700">
+                  <label htmlFor="nombre_maquina" className="block text-sm font-bold text-gray-700 ">
                     Nombre:
-                  </label>
+                  </label >
                   <input
                     type="text"
-                    id="nombre"
+                    id="nombre_maquina"
                     value={nombre}
                     onChange={(e) => setNombre(e.target.value)}
-                    className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+                    className="w-full border border-gray-300 rounded px-3 py-2 mt-1 text-black"
                     placeholder="Nombre"
                   />
                 </div>
+
                 <div className="mb-4">
                   <label htmlFor="marca" className="block text-sm font-bold text-gray-700">
                     Marca:
@@ -558,10 +561,11 @@ const Maquina = () => {
                     id="marca"
                     value={marca}
                     onChange={(e) => setMarca(e.target.value)}
-                    className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+                    className="w-full border border-gray-300 rounded px-3 py-2 mt-1 text-black"
                     placeholder="Marca"
                   />
                 </div>
+
                 <div className="mb-4">
                   <label htmlFor="placa" className="block text-sm font-bold text-gray-700">
                     Placa:
@@ -571,7 +575,7 @@ const Maquina = () => {
                     id="placa"
                     value={placa}
                     onChange={(e) => setPlaca(e.target.value)}
-                    className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+                    className="w-full border border-gray-300 rounded px-3 py-2 mt-1 text-black"
                     placeholder="Placa"
                   />
                 </div>
@@ -584,7 +588,7 @@ const Maquina = () => {
                     id="modelo"
                     value={modelo}
                     onChange={(e) => setModelo(e.target.value)}
-                    className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+                    className="w-full border border-gray-300 rounded px-3 py-2 mt-1 text-black"
                     placeholder="Modelo"
                   />
                 </div>
@@ -597,7 +601,7 @@ const Maquina = () => {
                     id="cantidad"
                     value={cantidad}
                     onChange={(e) => setCantidad(e.target.value)}
-                    className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+                    className="w-full border border-gray-300 rounded px-3 py-2 mt-1 text-black"
                     placeholder="Cantidad"
                   />
                 </div>
@@ -623,7 +627,7 @@ const Maquina = () => {
                     id="serial"
                     value={serial}
                     onChange={(e) => setSerial(e.target.value)}
-                    className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+                    className="w-full border border-gray-300 rounded px-3 py-2 mt-1 text-black"
                     placeholder="Serial"
                   />
                 </div>
@@ -648,7 +652,7 @@ const Maquina = () => {
                     id="descripcion"
                     value={descripcion}
                     onChange={(e) => setDescripcion(e.target.value)}
-                    className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+                    className="w-full border border-gray-300 rounded px-3 py-2 mt-1 text-black"
                     placeholder="Descripcion"
                   />
                 </div>
@@ -661,7 +665,7 @@ const Maquina = () => {
                     id="estado_maquina"
                     value={estado}
                     onChange={(e) => setEstado(e.target.value)}
-                    className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+                    className="w-full border border-gray-300 rounded px-3 py-2 mt-1 text-black"
                     placeholder="Estado"
                   />
                 </div>
@@ -676,7 +680,7 @@ const Maquina = () => {
                     id="nombre_usuario"
                     value={id_usuario}
                     onChange={(e) => setid_usuario(e.target.value)}
-                    className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+                    className="w-full border border-gray-300 rounded px-3 py-2 mt-1 text-black"
                     placeholder="id_usuario"
                   />
                 </div>
@@ -689,7 +693,7 @@ const Maquina = () => {
                     id="nombre_area"
                     value={id_area}
                     onChange={(e) => setid_area(e.target.value)}
-                    className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+                    className="w-full border border-gray-300 rounded px-3 py-2 mt-1 text-black"
                     placeholder="nombre_area"
                   />
                 </div>
@@ -702,7 +706,7 @@ const Maquina = () => {
                     id="nombre_ambiente"
                     value={id_ambiente}
                     onChange={(e) => setid_ambiente(e.target.value)}
-                    className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+                    className="w-full border border-gray-300 rounded px-3 py-2 mt-1 text-black"
                     placeholder="nombre_ambiente"
                   />
                 </div>

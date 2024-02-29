@@ -16,7 +16,7 @@ const Header = () => {
   return (
     <header
       style={{
-        backgroundColor: "#37474F", 
+        backgroundColor: "#2A5D84", 
         height: "100px",
         display: "flex",
         alignItems: "center",
