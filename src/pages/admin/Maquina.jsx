@@ -259,7 +259,7 @@ const Maquina = () => {
     { name: 'serial', label: 'Serial' },
     { name: 'imagen', label: 'Imagen' },
     { name: 'descripción', label: 'Descripción' },
-    { name: 'estado', label: 'Estado' },
+    { name: 'estado_maquinaa', label: 'Estado' },
     { name: 'nombre_usuario', label: 'Nombre Usuario' },
     { name: 'nombre_area', label: 'Nombre Área' },
     { name: 'nombre_ambiente', label: 'Nombre Ambiente' },
@@ -460,12 +460,12 @@ const Maquina = () => {
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="estado_maquina" className="block text-sm font-bold text-gray-700">
+                <label htmlFor="estado_maquinaa" className="block text-sm font-bold text-gray-700">
                   Estado:
                 </label>
                 <input
                   type="text"
-                  id="estado_maquina"
+                  id="estado_maquinaa"
                   value={estado}
                   onChange={(e) => setEstado(e.target.value)}
                   className="w-full border border-gray-300 rounded px-3 py-2 mt-1 text-black"
@@ -518,7 +518,7 @@ const Maquina = () => {
                 <input
                   type="text"
                   id="estado_maquina"
-                  value={estado}
+                  value={estado_maquina}
                   onChange={(e) => setestado_maquina(e.target.value)}
                   className="w-full border border-gray-300 rounded px-3 py-2 mt-1 text-black"
                   placeholder="Nuevo Estado Máquina"
@@ -656,20 +656,21 @@ const Maquina = () => {
                     placeholder="Descripcion"
                   />
                 </div>
+    
+                
                 <div className="mb-4">
-                  <label htmlFor="estado_maquina" className="block text-sm font-bold text-gray-700">
-                    Estado:
-                  </label>
-                  <input
-                    type="text"
-                    id="estado_maquina"
-                    value={estado}
-                    onChange={(e) => setEstado(e.target.value)}
-                    className="w-full border border-gray-300 rounded px-3 py-2 mt-1 text-black"
-                    placeholder="Estado"
-                  />
-                </div>
-
+                <label htmlFor="estado_maquinaa" className="block text-sm font-bold text-gray-700">
+                  Estado:
+                </label>
+                <input
+                  type="text"
+                  id="estado_maquinaa"
+                  value={estado}
+                  onChange={(e) => setEstado(e.target.value)}
+                  className="w-full border border-gray-300 rounded px-3 py-2 mt-1 text-black"
+                  placeholder="Nuevo Estado"
+                />
+              </div>
 
                 <div className="mb-4">
                   <label htmlFor="nombre_usuario" className="block text-sm font-bold text-gray-700">
@@ -710,6 +711,20 @@ const Maquina = () => {
                     placeholder="nombre_ambiente"
                   />
                 </div>
+
+                <div className="mb-4">
+                <label htmlFor="estado_maquina" className="block text-sm font-bold text-gray-700">
+                  Estado Máquina:
+                </label>
+                <input
+                  type="text"
+                  id="estado_maquina"
+                  value={estado_maquina}
+                  onChange={(e) => setestado_maquina(e.target.value)}
+                  className="w-full border border-gray-300 rounded px-3 py-2 mt-1 text-black"
+                  placeholder="Nuevo Estado Máquina"
+                />
+              </div>
               </div>
             </form>
             <button
