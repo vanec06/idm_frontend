@@ -1,0 +1,13 @@
+#mainContent {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+.sidebar {
+    grid-row-start: 1;
+    grid-row-end: 3;
+}

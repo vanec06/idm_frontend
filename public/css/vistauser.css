@@ -1,0 +1,107 @@
+.border-box {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    color: black;
+  }
+  
+  
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .col-sm-2,
+  .col-sm-4 {
+    flex: 0 0 calc(50% - 20px);
+    margin-right: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .col-sm-10 {
+    flex: 0 0 calc(100% - 20px);
+  }
+  
+  .img-container {
+    position: relative;
+  }
+  
+  .img-container img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .btn-group {
+    display: flex;
+    align-items: center;
+  }
+  
+  .btn-group .btn {
+    margin-right: 10px;
+  }
+  
+  .row-info-box {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .first-column {
+    flex: 0 0 20%;
+    font-weight: bold;
+  }
+  
+  
+  .profile-input {
+    width: 20%;
+    padding: px;
+  }
+  
+  
+  .btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+  
+  .btn-btn-secondary {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .btn-btn-secondary:hover {
+    background-color: #0056b3;
+  }
+  
+  .btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .btn-danger:hover {
+    background-color: #c82333;
+  }
+  .profle-input{
+    width: 100%; 
+    padding: 8px; 
+  
+  }
+.foto {
+  width: 100px; 
+  height: 100px; 
+}
