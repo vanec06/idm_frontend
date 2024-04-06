@@ -718,9 +718,14 @@ const Maquina = () => {
                   className="w-full border border-gray-300 rounded px-3 py-2 mt-1 text-stone-950 "
                 >
                   <option value="">Selecciona un tipo </option>
-                  <option value="activo">Activo</option>
-                  <option value="inactivo">Inactivo</option>
-                  <option value="reparacion">Reparacion</option>
+                  <option value="con_mantenimiento">Con mantenimiento, no aplica calibracion</option>
+                  <option value="calibracion_vigente">Con mantenimiento y calibracion vigente</option>
+                  <option value="no_realizado_calibracion">Con mantenimiento y no realizada la calibracion</option>
+                  <option value="sin_calibracion">Con mantenimiento y sin calibracion vigente</option>
+                  <option value="dar_baja">En proceso para dar de baja</option>
+                  <option value="no_cuenta_mantenimienton">No cuenta con mantenimiento ni calibracion</option>
+                  <option value="mantenimiento_correctivo">Requiere mantenimiento correctivo</option>
+                  <option value="mantenimiento_preventivo">Requiere mantenimiento, no aplica calibracion</option>
                 </select>
                 <div className="text-red-500">{errors.map((error) => error.path == 'estado' ? error.msg : '')}</div>
               </div>
@@ -933,10 +938,14 @@ const Maquina = () => {
                   className="w-full border border-gray-300 rounded px-3 py-2 mt-1 text-stone-950 "
                 >
                   <option value="">Selecciona un tipo </option>
-                  <option value="activo">Activo</option>
-                  <option value="inactivo">Inactivo</option>
-                  <option value="reparacion">Reparación</option>
-
+                  <option value="con_mantenimiento">Con mantenimiento, no aplica calibracion</option>
+                  <option value="calibracion_vigente">Con mantenimiento y calibracion vigente</option>
+                  <option value="no_realizado_calibracion">Con mantenimiento y no realizada la calibracion</option>
+                  <option value="sin_calibracion">Con mantenimiento y sin calibracion vigente</option>
+                  <option value="dar_baja">En proceso para dar de baja</option>
+                  <option value="no_cuenta_mantenimienton">No cuenta con mantenimiento ni calibracion</option>
+                  <option value="mantenimiento_correctivo">Requiere mantenimiento correctivo</option>
+                  <option value="mantenimiento_preventivo">Requiere mantenimiento, no aplica calibracion</option>
                 </select>
                 <div className="text-red-500">{errors.map((error) => error.path == 'estado' ? error.msg : '')}</div>
               </div>
