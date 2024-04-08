@@ -191,10 +191,9 @@ const Maquina = () => {
 
   const openModal = (maquina) => {
     if (maquina) {
-
       setNuevoManual('yes')
       setNuevaImagenFile('yes')
-
+      // console.log(maquina);
       setSelectedMaquina(maquina);
       setid_maquina(maquina.id_maquina || '');
       setNombre(maquina.nombre_maquina || '');
@@ -210,7 +209,7 @@ const Maquina = () => {
       // setSelectedArea(maquina.nombre_area || '');
       // setSelectedAmbiente(maquina.nombre_ambiente || '');
       setestado_maquina(maquina.estado_maquina || '');
-      setAreaId(maquina.id_area || '');
+      // setAreaId(maquina.id_area || '');
       setambienteId(maquina.id_ambiente || '');
       setModalIsOpen(true);
     } else {
@@ -363,9 +362,9 @@ const Maquina = () => {
         imagen: imagen,
         descripcion: descripcion,
         estado: estado,
-        id_usuario: selectedUsuario ? selectedUsuario.value: 1,
-        id_area: selectedArea ? selectedArea.value : areaId,
-        id_ambiente: selectedAmbiente ? selectedAmbiente.value: 2,
+        // id_usuario: selectedUsuario ? selectedUsuario.value : 1,
+        // id_area: selectedArea ? selectedArea.value : areaId,
+        id_ambiente: selectedAmbiente ? selectedAmbiente.value : ambienteId,
         estado_maquina: estado_maquina,
       }
       console.log('DATA: ', formData);
@@ -382,7 +381,8 @@ const Maquina = () => {
         });
       }
 
-      if (responseData.data.status == true) {
+      // alert(responseData.data.status)
+      if (responseData.data.status == '200 OK') {
         const updatedMachines = await fetch(`http://${ruta}:4000/maquina/listar`, {
           method: 'POST'
         })
@@ -451,7 +451,6 @@ const Maquina = () => {
   }
 
   const columnsExcel = [
-    { key: "nombre_usuario", label: "Usuario" },
     { key: "nombre_maquina", label: "Nombre" },
     { key: "marca", label: "Marca" },
     { key: "placa", label: "Placa Sena" },
@@ -495,7 +494,6 @@ const Maquina = () => {
     },
     { name: 'descripción', label: 'Descripción' },
     { name: 'estado', label: 'Estado' },
-    { name: 'id_usuario', label: 'Nombre Usuario' },
     { name: 'id_area', label: 'Nombre Área' },
     { name: 'id_ambiente', label: 'Nombre Ambiente' },
     { name: 'estado_maquina', label: 'Estado Máquina' },
@@ -554,7 +552,7 @@ const Maquina = () => {
       <div className="mt-8 mx-6">
         <MUIDataTable
           title={"Maquinas"}
-          data={maquinas.map(maquina => [maquina.id_maquina, maquina.nombre_maquina, maquina.marca, maquina.placa, maquina.modelo, maquina.manual, maquina.serial, maquina.imagen, maquina.descripcion, maquina.estado, maquina.nombre_usuario, maquina.nombre_area, maquina.nombre_ambiente, maquina.estado_maquina])}
+          data={maquinas.map(maquina => [maquina.id_maquina, maquina.nombre_maquina, maquina.marca, maquina.placa, maquina.modelo, maquina.manual, maquina.serial, maquina.imagen, maquina.descripcion, maquina.estado, maquina.nombre_area, maquina.nombre_ambiente, maquina.estado_maquina])}
           columns={columns}
           options={options}
         />
@@ -712,6 +710,7 @@ const Maquina = () => {
                 <label htmlFor="estado" className="block text-sm font-bold text-gray-700">
                   Estado:
                 </label>
+                {console.log(estado)}
                 <select id="estado"
                   defaultValue={estado}
                   onChange={(e) => setEstado(e.target.value)}
@@ -731,7 +730,7 @@ const Maquina = () => {
               </div>
 
 
-
+              {/* 
               <div className="mb-4">
                 <label htmlFor="id_usuario" className="block text-sm font-bold text-gray-700">Usuario:</label>
                 <Select
@@ -743,10 +742,10 @@ const Maquina = () => {
                   placeholder="Selecciona el ID del usuario"
                 />
                 <div className="text-red-500">{errors.map((error) => error.path == 'id_usuario' ? error.msg : '')}</div>
-              </div>
+              </div> */}
 
 
-              <div className="mb-4">
+              {/* <div className="mb-4">
                 <label htmlFor="id_area" className="block text-sm font-bold text-gray-700">Area:</label>
                 {console.log('mmm: ', areaId)}
                 <Select
@@ -758,13 +757,13 @@ const Maquina = () => {
                   placeholder="Selecciona el area"
                 />
                 <div className="text-red-500">{errors.map((error) => error.path == 'id_area' ? error.msg : '')}</div>
-              </div>
+              </div> */}
 
               <div className="mb-4">
                 <label htmlFor="id_ambiente" className="block text-sm font-bold text-gray-700">Ambiente:</label>
+
                 <Select
                   id="id_ambiente"
-
                   onChange={(option) => setSelectedAmbiente(option)}
                   defaultValue={{ value: ambienteId, label: ambientes.find(ambiente => ambiente.id_ambiente === ambienteId)?.nombre || '' }}
                   options={ambientes.map(ambiente => ({ value: ambiente.id_ambiente, label: ambiente.nombre }))}
