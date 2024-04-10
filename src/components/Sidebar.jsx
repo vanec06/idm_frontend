@@ -263,6 +263,7 @@ const Sidebar = ({ usuario }) => {
               {/* Resto de notificaciones */}
             </Menu>
             {/* Menú de perfil */}
+            {usuario.rol != 'tecnico' ?   
             <Menu
               menuButton={
                 <MenuButton
@@ -323,12 +324,13 @@ const Sidebar = ({ usuario }) => {
                       objectFit: "cover",
                     }}
                   />
-                  <div style={{ flex: "1" }}>
+                    <div style={{ flex: "1" }}>
                     <span style={{ fontSize: "15px" }}>Usuario</span>
                     <span style={{ color: "#999", fontSize: "13px" }}> <br />
                       Ver perfil
                     </span>
                   </div>
+            
                 </Link>
               </MenuItem>
               <hr style={{ margin: "4px 0", borderColor: "#ccc" }} />
@@ -342,6 +344,7 @@ const Sidebar = ({ usuario }) => {
               >
               </MenuItem>
             </Menu>
+             : ''}
           </nav>
         </header>
       </div>
