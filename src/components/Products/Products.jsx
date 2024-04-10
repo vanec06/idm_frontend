@@ -5,6 +5,7 @@ import Modal from "./Modal";
 import Api, { ruta } from "../Api";
 import { IoMdSearch } from "react-icons/io";
 import isEmpty from 'lodash/isEmpty';
+import { Link } from 'react-router-dom';
 
 export const listarMaquinas = async (filter = {}) => {
   try {
@@ -126,50 +127,66 @@ const Products = () => {
 
   return (
     <div>
-      <div className="bg-[#2A5D84] dark:bg-gray-900 dark:text-white duration-200 relative z-40">
+      <div className="bg-gray-900:text-white duration-200 relative z-40">
         <div className="py-4">
           <div className="container flex justify-between items-center  fixed top-8">
-            {/* LOGO */}
-            <div className="flex items-center gap-4">
-
-              {/* MENU*/}
-              <div className="hidden lg:block">
-              </div>
-            </div>
 
             {/* SECCIONES */}
-            <div className="flex justify-between items-center gap-4 bg-gray-400 p-3 rounded">
-              {/* BUSCAR */}
-              <div className="relative group hidden sm:block">
-                <div className="relative">
-                  <input disabled={disableBuscar}
-                    onChange={valueBuscar}
-                    type="text"
-                    placeholder="Buscar"
-                    className="search-bar pl-10 text-black" />
-                  {disableBuscar ? ''
-                    : < IoMdSearch className="cursor-pointer text-xl text-[#2A5D84] absolute top-1/2 -translate-y-1/2 left-3" onClick={() => buscarMaquina()} />}
-                </div>
-              </div>
+            <div className="fixed top-0 left-0 w-full bg-gray-100 shadow-md">
+  <div className="container mx-auto px-4 py-3">
+    <div className="flex justify-between items-center gap-4">
+      {/* BUSCAR */}
+      <div className="relative group flex-grow">
+        <input 
+          disabled={disableBuscar}
+          onChange={valueBuscar}
+          type="text"
+          placeholder="Buscar"
+          className="search-bar pl-10 text-gray-700 bg-gray-200 rounded-full py-2 px-4 focus:outline-none focus:bg-white focus:border-gray-500 transition-colors duration-300 ease-in-out w-full"
+        />
+        {!disableBuscar && (
+          <IoMdSearch 
+            className="absolute left-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-600 hover:text-gray-700 transition-colors duration-300 ease-in-out"
+            onClick={() => buscarMaquina()}
+          />
+        )}
+      </div>
 
-              {/* SELECT DE AREA */}
-              <div className="flex gap-3">
-                <select className="bg-white dark:bg-gray-800 dark:text-white border border-gray-300 dark:border-gray-700 rounded-md px-3 py-1" onChange={(e) => filtrarPorArea(e.target.value)}>
-                  <option value={''}>Seleccione un area</option>
-                  {areas.map((index) => (
-                    <option key={index.id_area} value={index.id_area}>{index.nombre}</option>
-                  ))}
-                </select>
+      {/* SELECT DE AREA */}
+      <select 
+        className="select-style"
+        onChange={(e) => filtrarPorArea(e.target.value)}
+      >
+        <option value={''}>Seleccione un área</option>
+        {areas.map((index) => (
+          <option key={index.id_area} value={index.id_area}>{index.nombre}</option>
+        ))}
+      </select>
 
-                {/* SELECT DE AMBIENTE */}
-                <select disabled={disable} className="bg-white dark:bg-gray-800 dark:text-white border border-gray-300 dark:border-gray-700 rounded-md px-3 py-1" value={valueAmbiente} onChange={(e) => filtrarPorAmbiente(e.target.value)} >
-                  <option value={''}>Seleccione un ambiente</option>
-                  {ambientes.map((index) => (
-                    <option key={index.id_ambiente} value={index.id_ambiente}>{index.nombre}</option>
-                  ))}
-                </select>
-              </div>
-            </div>
+      {/* SELECT DE AMBIENTE */}
+      <select 
+        disabled={disable} 
+        className="select-style"
+        value={valueAmbiente} 
+        onChange={(e) => filtrarPorAmbiente(e.target.value)}
+      >
+        <option value={''}>Seleccione un ambiente</option>
+        {ambientes.map((index) => (
+          <option key={index.id_ambiente} value={index.id_ambiente}>{index.nombre}</option>
+        ))}
+      </select>
+
+      {/* Botón de Iniciar Sesión */}
+      <Link to="/login"> 
+        <button className="bg-blue-500 hover:bg-blue-600 font-semibold py-2 px-4 rounded transition duration-300 ease-in-out">
+          Iniciar Sesión
+        </button>
+      </Link>
+    </div>
+  </div>
+</div>
+
+
           </div>
         </div>
       </div>
