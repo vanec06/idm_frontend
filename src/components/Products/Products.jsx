@@ -4,24 +4,32 @@ import ProductCard from "./ProductCard";
 import Modal from "./Modal";
 import Api, { ruta } from "../Api";
 
+export const listarMaquinas = async (filter = {}) => {
+  try {
+    const resp = await Api.post('/maquina/listar', filter);
+    const dataM = resp.data;
+    console.log('DATA U: ', dataM);
+    return dataM
+    // setData(dataM); 
+  } catch (error) {
+    console.log('DATA U ERROR: ', error);
+    alert('Error al cargar las máquinas');
+  }
+};
+
+
 const Products = () => {
   const [data, setData] = useState([]); // 
 
   useEffect(() => {
-    listarMaquinas(); //
+    dataMaquinas();
   }, []);
 
-  const listarMaquinas = async () => {
-    try {
-      const resp = await Api.post('/maquina/listar');
-      const dataM = resp.data;
-      console.log('DATA U: ', dataM);
-      setData(dataM); // 
-    } catch (error) {
-      console.log('DATA U ERROR: ', error);
-      alert('Error al cargar las máquinas');
-    }
-  };
+  const dataMaquinas = async () => {
+    const resp = await listarMaquinas();
+    console.log('DATA XD: ', resp);
+    setData(resp)
+  }
 
   const [selectedMachine, setSelectedMachine] = useState(null);
 
@@ -36,7 +44,7 @@ const Products = () => {
   return (
     <div>
       <div className="container">
-      <Heading title={<span style={{color: 'black'}}>Inventario</span>} subtitle={"Explora las máquinas"} />
+        <Heading title={<span style={{ color: 'black' }}>Inventario</span>} subtitle={"Explora las máquinas"} />
         <ProductCard data={data} onDescriptionClick={handleDescriptionClick} />
         {selectedMachine && (
           <Modal onClose={handleCloseModal}>
@@ -52,6 +60,7 @@ const Products = () => {
                 <div className=""><b>Serial: </b>{selectedMachine.serial}</div>
                 <div className=""><b>Placa: </b>{selectedMachine.placa}</div>
                 <div className=""><b>Estado: </b>{selectedMachine.estado_maquina}</div>
+                <div className=""><b>Ambiente: </b>{selectedMachine.nombre_ambiente}</div>
                 <a href={`http://${ruta}:4000/images/pdf/${selectedMachine.placa}/${selectedMachine.manual}`} target="_blank" title='Ver manual PDF'><div className="bg-blue-500 cursor-pointer rounded p-2 w-max font-bold text-white">Ver Manual</div></a>
               </div>
             </div>

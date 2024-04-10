@@ -5,6 +5,7 @@ import MUIDataTable from "mui-datatables";
 import Swal from 'sweetalert2';
 import { ruta } from "../../components/Api";
 import { exportToExcel } from "../../components/Reportes";
+import Select from 'react-select';
 
 const Ambiente = () => {
   const [id_ambiente, setid_ambiente] = useState('');
@@ -14,9 +15,51 @@ const Ambiente = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [errors, setErrors] = useState([]);
 
+
+  const [usuarios, setUsuarios] = useState([]);
+  const [areas, setAreas] = useState([]);
+  const [selectedUsuario, setSelectedUsuario] = useState(null);
+  const [selectedArea, setSelectedArea] = useState(null);
+
+  const [usuarioId, setUsuarioId] = useState(null);
+  const [areaId, setAreaId] = useState(null);
+
   useEffect(() => {
     listarAmbientes();
+    listarUsuarios();
+    listarAreas();
+
   }, []);
+
+  const listarUsuarios = async () => {
+    try {
+      const response = await fetch(`http://${ruta}:4000/usuario/listar`);
+      const data = await response.json();
+
+      if (response.ok) {
+        setUsuarios(data);
+      } else {
+        console.error('Error al listar usuarios:', data.message);
+      }
+    } catch (error) {
+      console.error('Error al listar usuarios:', error);
+    }
+  };
+
+  const listarAreas = async () => {
+    try {
+      const response = await fetch(`http://${ruta}:4000/area/listar`);
+      const data = await response.json();
+
+      if (response.ok) {
+        setAreas(data);
+      } else {
+        console.error('Error al listar áreas:', data.message);
+      }
+    } catch (error) {
+      console.error('Error al listar áreas:', error);
+    }
+  };
 
   const buscarAmbientes = async (id_ambiente) => {
     try {
@@ -64,6 +107,10 @@ const Ambiente = () => {
     if (ambiente) {
       setid_ambiente(ambiente.id_ambiente);
       setnombre(ambiente.nombre);
+      setUsuarioId(ambiente.id_usuario)
+      setAreaId(ambiente.area_id_area)
+      console.log('XD:; ', ambiente.id_usuario);
+      // setnombre(ambiente.nombre);
     }
   };
 
@@ -79,10 +126,12 @@ const Ambiente = () => {
     e.preventDefault();
 
     const nuevoAmbiente = {
-      id_ambiente,
-      nombre,
+      nombre: nombre,
+      id_usuario: selectedUsuario ? selectedUsuario.value : null,
+      area_id_area: selectedArea ? selectedArea.value : null
     };
 
+    console.log('DATA: ', nuevoAmbiente);
     const response = await fetch(`http://${ruta}:4000/ambiente/registrar`, {
       method: 'POST',
       headers: {
@@ -109,6 +158,8 @@ const Ambiente = () => {
   const handleActualizarAmbiente = async () => {
     const ambienteActualizado = {
       id_ambiente: selectedAmbiente.id_ambiente,
+      area_id_area: selectedArea ? selectedArea.value : areaId,
+      id_usuario: selectedUsuario ? selectedUsuario.value : usuarioId,
       nombre,
     };
 
@@ -145,6 +196,14 @@ const Ambiente = () => {
       label: "Nombre",
     },
     {
+      name: "nombre_area",
+      label: "Area",
+    },
+    {
+      name: "encargado",
+      label: "Encargado",
+    },
+    {
       name: "acciones",
       label: "Acciones",
       options: {
@@ -167,8 +226,8 @@ const Ambiente = () => {
     responsive: 'standard',
     print: false,
     viewColumns: false,
-    download:false,
-    filter:false,
+    download: false,
+    filter: false,
     selectableRows: 'none', // If you don't want checkboxes for row selection
   };
 
@@ -188,10 +247,11 @@ const Ambiente = () => {
       <div className="mt-8 mx-6">
         <MUIDataTable
           title={"Ambientes"}
-          data={ambientes.map(ambiente => [ambiente.id_ambiente, ambiente.nombre, null])}
+          data={ambientes.map(ambiente => [ambiente.id_ambiente, ambiente.nombre, ambiente.nombre_area, ambiente.encargado, null])}
           columns={columns}
           options={options}
         />
+
       </div>
       <Modal
         isOpen={isOpen}
@@ -231,6 +291,33 @@ const Ambiente = () => {
                 />
                 <div className="text-red-500">{errors.length > 0 ? errors[0].msg : ''}</div>
               </div>
+
+              <div className="mb-4">
+                <label htmlFor="id_usuario" className="block text-sm font-bold text-gray-700">Usuario:</label>
+                {/* {console.log('mmm: ',  usuarioId)} */}
+                <Select
+                  id="id_usuario"
+                  defaultValue={{ value: usuarioId, label: usuarios.find(usuario => usuario.id_usuario === usuarioId)?.nombres || '' }}
+                  onChange={(option) => setSelectedUsuario(option)}
+                  options={usuarios.map(usuario => ({ value: usuario.id_usuario, label: usuario.identificacion }))}
+                  className="w-full mt-1 text-black"
+                  placeholder="Selecciona el ID del usuario"
+                />
+                <div className="text-red-500">{errors.map((error) => error.path == 'id_usuario' ? error.msg : '')}</div>
+              </div>
+              <div className="mb-4">
+                <label htmlFor="id_area" className="block text-sm font-bold text-gray-700">Area:</label>
+                <Select
+                  id="id_area"
+                  onChange={(option) => setSelectedArea(option)}
+                  defaultValue={{ value: areaId, label: areas.find(area => area.id_area === areaId)?.nombre || '' }}
+                  options={areas.map(area => ({ value: area.id_area, label: area.nombre }))}
+                  className="w-full mt-1 text-black"
+                  placeholder="Selecciona el area"
+                />
+                <div className="text-red-500">{errors.map((error) => error.path == 'area_id_area' ? error.msg : '')}</div>
+              </div>
+
               <div className="flex justify-between">
                 <button
                   type="button"
@@ -267,6 +354,30 @@ const Ambiente = () => {
                   placeholder="Nuevo Ambiente"
                 />
                 <div className="text-red-500">{errors.length > 0 ? errors[0].msg : ''}</div>
+              </div>
+              <div className="mb-4">
+                <label htmlFor="id_usuario" className="block text-sm font-bold text-gray-700">Usuario:</label>
+                <Select
+                  id="id_usuario"
+                  // value={selectedUsuario}
+                  onChange={(option) => setSelectedUsuario(option)}
+                  options={usuarios.map(usuario => ({ value: usuario.id_usuario, label: usuario.nombres + ',' + usuario.identificacion }))}
+                  className="w-full mt-1 text-black"
+                  placeholder="Selecciona el ID del usuario"
+                />
+                <div className="text-red-500">{errors.map((error) => error.path == 'id_usuario' ? error.msg : '')}</div>
+              </div>
+              <div className="mb-4">
+                <label htmlFor="id_area" className="block text-sm font-bold text-gray-700">Area:</label>
+                <Select
+                  id="id_area"
+                  // value={selectedArea}
+                  onChange={(option) => setSelectedArea(option)}
+                  options={areas.map(area => ({ value: area.id_area, label: area.nombre }))}
+                  className="w-full mt-1 text-black"
+                  placeholder="Selecciona el area"
+                />
+                <div className="text-red-500">{errors.map((error) => error.path == 'area_id_area' ? error.msg : '')}</div>
               </div>
               <div className="flex justify-between">
                 <button

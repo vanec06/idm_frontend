@@ -1,15 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { IoMdSearch } from "react-icons/io";
 import Api from "../Api";
+import { listarMaquinas } from "../Products/Products";
 
 
 const Navbar = ({ }) => {
+  
   useEffect(() => {
     listarAreas()
   }, [])
 
   const [areas, setArea] = useState([]);
 
+  const filtrarPorArea = (filter) => {
+
+    const filterData = { area: filter }
+    listarMaquinas(filterData)
+  }
 
   const listarAreas = async () => {
     try {
@@ -49,7 +56,7 @@ const Navbar = ({ }) => {
               </div>
             </div>
 
-            {/* SELECT DE AMBIENTES */}
+            {/* SELECT DE AREA */}
             <div>
               <select className="bg-white dark:bg-gray-800 dark:text-white border border-gray-300 dark:border-gray-700 rounded-md px-3 py-1" onChange={(e) => filtrarPorArea(e.target.value)}>
                 {areas.map((index) => (

@@ -24,10 +24,7 @@ const Maquina = () => {
   const [imagen, setImagen] = useState('');
   const [descripcion, setDescripcion] = useState('');
   const [estado, setEstado] = useState('');
-  const [usuarios, setUsuarios] = useState([]);
-  const [selectedUsuario, setSelectedUsuario] = useState(null);
-  const [areas, setAreas] = useState([]);
-  const [selectedArea, setSelectedArea] = useState(null);
+  
   const [ambientes, setAmbientes] = useState([]);
   const [selectedAmbiente, setSelectedAmbiente] = useState(null);
   const [estado_maquina, setestado_maquina] = useState('');
@@ -49,40 +46,9 @@ const Maquina = () => {
 
   useEffect(() => {
     listarMaquinas();
-    listarUsuarios();
-    listarAreas();
     listarAmbientes();
   }, []);
 
-  const listarUsuarios = async () => {
-    try {
-      const response = await fetch(`http://${ruta}:4000/usuario/listar`);
-      const data = await response.json();
-
-      if (response.ok) {
-        setUsuarios(data);
-      } else {
-        console.error('Error al listar usuarios:', data.message);
-      }
-    } catch (error) {
-      console.error('Error al listar usuarios:', error);
-    }
-  };
-
-  const listarAreas = async () => {
-    try {
-      const response = await fetch(`http://${ruta}:4000/area/listar`);
-      const data = await response.json();
-
-      if (response.ok) {
-        setAreas(data);
-      } else {
-        console.error('Error al listar áreas:', data.message);
-      }
-    } catch (error) {
-      console.error('Error al listar áreas:', error);
-    }
-  };
 
   const listarAmbientes = async () => {
     try {
@@ -191,10 +157,9 @@ const Maquina = () => {
 
   const openModal = (maquina) => {
     if (maquina) {
-
       setNuevoManual('yes')
       setNuevaImagenFile('yes')
-
+      // console.log(maquina);
       setSelectedMaquina(maquina);
       setid_maquina(maquina.id_maquina || '');
       setNombre(maquina.nombre_maquina || '');
@@ -210,7 +175,7 @@ const Maquina = () => {
       // setSelectedArea(maquina.nombre_area || '');
       // setSelectedAmbiente(maquina.nombre_ambiente || '');
       setestado_maquina(maquina.estado_maquina || '');
-      setAreaId(maquina.id_area || '');
+      // setAreaId(maquina.id_area || '');
       setambienteId(maquina.id_ambiente || '');
       setModalIsOpen(true);
     } else {
@@ -226,8 +191,8 @@ const Maquina = () => {
       setImagen('');
       setDescripcion('');
       setEstado('');
-      setSelectedUsuario('');
-      setSelectedArea('');
+      // setSelectedUsuario('');
+      // setSelectedArea('');
       setSelectedAmbiente('');
       setestado_maquina('');
       setModalIsOpen(true);
@@ -249,8 +214,8 @@ const Maquina = () => {
     setImagen('');
     setDescripcion('');
     setEstado('');
-    setSelectedUsuario('');
-    setSelectedArea('');
+    // setSelectedUsuario('');
+    // setSelectedArea('');
     setSelectedAmbiente('');
     setestado_maquina('');
     setErrors([]);
@@ -308,8 +273,8 @@ const Maquina = () => {
         imagen: imagen,
         descripcion: descripcion,
         estado: estado,
-        id_usuario: selectedUsuario.value,
-        id_area: selectedArea.value,
+        // id_usuario: selectedUsuario.value,
+        // id_area: selectedArea.value,
         id_ambiente: selectedAmbiente.value,
         estado_maquina: estado_maquina,
       }
@@ -363,9 +328,9 @@ const Maquina = () => {
         imagen: imagen,
         descripcion: descripcion,
         estado: estado,
-        id_usuario: selectedUsuario ? selectedUsuario.value: 1,
-        id_area: selectedArea ? selectedArea.value : areaId,
-        id_ambiente: selectedAmbiente ? selectedAmbiente.value: 2,
+        // id_usuario: selectedUsuario ? selectedUsuario.value : 1,
+        // id_area: selectedArea ? selectedArea.value : areaId,
+        id_ambiente: selectedAmbiente ? selectedAmbiente.value : ambienteId,
         estado_maquina: estado_maquina,
       }
       console.log('DATA: ', formData);
@@ -382,7 +347,8 @@ const Maquina = () => {
         });
       }
 
-      if (responseData.data.status == true) {
+      // alert(responseData.data.status)
+      if (responseData.data.status == '200 OK') {
         const updatedMachines = await fetch(`http://${ruta}:4000/maquina/listar`, {
           method: 'POST'
         })
@@ -451,7 +417,6 @@ const Maquina = () => {
   }
 
   const columnsExcel = [
-    { key: "nombre_usuario", label: "Usuario" },
     { key: "nombre_maquina", label: "Nombre" },
     { key: "marca", label: "Marca" },
     { key: "placa", label: "Placa Sena" },
@@ -495,7 +460,6 @@ const Maquina = () => {
     },
     { name: 'descripción', label: 'Descripción' },
     { name: 'estado', label: 'Estado' },
-    { name: 'id_usuario', label: 'Nombre Usuario' },
     { name: 'id_area', label: 'Nombre Área' },
     { name: 'id_ambiente', label: 'Nombre Ambiente' },
     { name: 'estado_maquina', label: 'Estado Máquina' },
@@ -554,7 +518,7 @@ const Maquina = () => {
       <div className="mt-8 mx-6">
         <MUIDataTable
           title={"Maquinas"}
-          data={maquinas.map(maquina => [maquina.id_maquina, maquina.nombre_maquina, maquina.marca, maquina.placa, maquina.modelo, maquina.manual, maquina.serial, maquina.imagen, maquina.descripcion, maquina.estado, maquina.nombre_usuario, maquina.nombre_area, maquina.nombre_ambiente, maquina.estado_maquina])}
+          data={maquinas.map(maquina => [maquina.id_maquina, maquina.nombre_maquina, maquina.marca, maquina.placa, maquina.modelo, maquina.manual, maquina.serial, maquina.imagen, maquina.descripcion, maquina.estado, maquina.nombre_area, maquina.nombre_ambiente, maquina.estado_maquina])}
           columns={columns}
           options={options}
         />
@@ -712,6 +676,7 @@ const Maquina = () => {
                 <label htmlFor="estado" className="block text-sm font-bold text-gray-700">
                   Estado:
                 </label>
+                {console.log(estado)}
                 <select id="estado"
                   defaultValue={estado}
                   onChange={(e) => setEstado(e.target.value)}
@@ -731,40 +696,11 @@ const Maquina = () => {
               </div>
 
 
-
-              <div className="mb-4">
-                <label htmlFor="id_usuario" className="block text-sm font-bold text-gray-700">Usuario:</label>
-                <Select
-                  id="id_usuario"
-                  value={selectedUsuario}
-                  onChange={(option) => setSelectedUsuario(option)}
-                  options={usuarios.map(usuario => ({ value: usuario.id_usuario, label: usuario.identificacion }))}
-                  className="w-full mt-1 text-black"
-                  placeholder="Selecciona el ID del usuario"
-                />
-                <div className="text-red-500">{errors.map((error) => error.path == 'id_usuario' ? error.msg : '')}</div>
-              </div>
-
-
-              <div className="mb-4">
-                <label htmlFor="id_area" className="block text-sm font-bold text-gray-700">Area:</label>
-                {console.log('mmm: ', areaId)}
-                <Select
-                  id="id_area"
-                  onChange={(option) => setSelectedArea(option)}
-                  defaultValue={{ value: areaId, label: areas.find(area => area.id_area === areaId)?.nombre || '' }}
-                  options={areas.map(area => ({ value: area.id_area, label: area.nombre }))}
-                  className="w-full mt-1 text-black"
-                  placeholder="Selecciona el area"
-                />
-                <div className="text-red-500">{errors.map((error) => error.path == 'id_area' ? error.msg : '')}</div>
-              </div>
-
               <div className="mb-4">
                 <label htmlFor="id_ambiente" className="block text-sm font-bold text-gray-700">Ambiente:</label>
+
                 <Select
                   id="id_ambiente"
-
                   onChange={(option) => setSelectedAmbiente(option)}
                   defaultValue={{ value: ambienteId, label: ambientes.find(ambiente => ambiente.id_ambiente === ambienteId)?.nombre || '' }}
                   options={ambientes.map(ambiente => ({ value: ambiente.id_ambiente, label: ambiente.nombre }))}
@@ -948,34 +884,6 @@ const Maquina = () => {
                   <option value="mantenimiento_preventivo">Requiere mantenimiento, no aplica calibracion</option>
                 </select>
                 <div className="text-red-500">{errors.map((error) => error.path == 'estado' ? error.msg : '')}</div>
-              </div>
-
-
-
-              <div className="mb-4">
-                <label htmlFor="id_usuario" className="block text-sm font-bold text-gray-700">Usuario:</label>
-                <Select
-                  id="id_usuario"
-                  value={selectedUsuario}
-                  onChange={(option) => setSelectedUsuario(option)}
-                  options={usuarios.map(usuario => ({ value: usuario.id_usuario, label: usuario.nombres + ',' + usuario.identificacion }))}
-                  className="w-full mt-1 text-black"
-                  placeholder="Selecciona el ID del usuario"
-                />
-                <div className="text-red-500">{errors.map((error) => error.path == 'id_usuario' ? error.msg : '')}</div>
-              </div>
-
-              <div className="mb-4">
-                <label htmlFor="id_area" className="block text-sm font-bold text-gray-700">Area:</label>
-                <Select
-                  id="id_area"
-                  value={selectedArea}
-                  onChange={(option) => setSelectedArea(option)}
-                  options={areas.map(area => ({ value: area.id_area, label: area.nombre }))}
-                  className="w-full mt-1 text-black"
-                  placeholder="Selecciona el area"
-                />
-                <div className="text-red-500">{errors.map((error) => error.path == 'id_area' ? error.msg : '')}</div>
               </div>
               <div className="mb-4">
                 <label htmlFor="id_ambiente" className="block text-sm font-bold text-gray-700">Ambiente:</label>
