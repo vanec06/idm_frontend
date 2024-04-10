@@ -103,6 +103,17 @@ const Login = () => {
           </Link>
         </div>
       </div>
+
+       {/* Botón de Inventario */}
+       <div style={{ position: "fixed", top: "20px", right: "20px", zIndex: "999" }}>
+  <Link to="/">
+    <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 ease-in-out">
+      Ver Inventario
+    </button>
+  </Link>
+</div>
+
+
       <style>{`
     .logo{
       background-image: url('img/logo.jpg');

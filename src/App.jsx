@@ -62,9 +62,9 @@ function App() {
   return (
     // <BrowserRouter>
     <Routes>
-      <Route path="/" element={<Login />} />
+      <Route path="/login" element={<Login />} />
       <Route path="/olvide-password" element={<ForgetPassword />} />
-      <Route path="/inventario" element={<Vista />} />
+      <Route path="/" element={<Vista />} />
 
       <Route path="/sidebar" element={<Sidebar usuario={usuario} />}>
         <Route index element={<Home />} />

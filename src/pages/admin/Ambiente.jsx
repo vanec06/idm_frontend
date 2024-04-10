@@ -24,7 +24,6 @@ const Ambiente = () => {
   const [usuarioId, setUsuarioId] = useState(null);
   const [areaId, setAreaId] = useState(null);
 
-  
   useEffect(() => {
     listarAmbientes();
     listarUsuarios();
@@ -88,7 +87,10 @@ const Ambiente = () => {
 
   const listarAmbientes = async () => {
     try {
-      const response = await fetch(`http://${ruta}:4000/ambiente/listar`);
+      const response = await fetch(`http://${ruta}:4000/ambiente/listar`, 
+    {
+      method: 'POST'
+    });
       const data = await response.json();
 
       if (response.ok) {

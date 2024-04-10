@@ -1,9 +1,7 @@
 import React from "react";
 import Navbar from "./components/Navbar/Navbar";
 import Banner from "./components/Banner/Banner";
-
 import cafe from "./assets/hero/cafe.png";
-
 import Products from "./components/Products/Products";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -38,9 +36,9 @@ const Vista = () => {
   return (
     <div className="bg-white dark:bg-gray-900 dark:text-white duration-200 overflow-hidden">
       <Navbar handleOrderPopup={handleOrderPopup} />
-
       <Banner data={BannerData} />
       <Products />
+      
     </div>
   );
 };
