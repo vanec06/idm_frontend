@@ -24,6 +24,7 @@ const Ambiente = () => {
   const [usuarioId, setUsuarioId] = useState(null);
   const [areaId, setAreaId] = useState(null);
 
+  
   useEffect(() => {
     listarAmbientes();
     listarUsuarios();
