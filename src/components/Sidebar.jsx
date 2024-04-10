@@ -158,7 +158,7 @@ const Sidebar = ({ usuario }) => {
         </ul>
         <div style={styles.logoutContainer}>
           <Link
-            to="/"
+            to="/login"
             onClick={handleLogout}
 
             style={styles.logoutLink}
