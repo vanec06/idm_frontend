@@ -24,7 +24,6 @@ const Maquina = () => {
   const [imagen, setImagen] = useState('');
   const [descripcion, setDescripcion] = useState('');
   const [estado, setEstado] = useState('');
-
   const [ambientes, setAmbientes] = useState([]);
   const [selectedAmbiente, setSelectedAmbiente] = useState(null);
   const [estado_maquina, setestado_maquina] = useState('');

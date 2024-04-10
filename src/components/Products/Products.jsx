@@ -6,6 +6,20 @@ import Api, { ruta } from "../Api";
 import { IoMdSearch } from "react-icons/io";
 import isEmpty from 'lodash/isEmpty';
 
+export const listarMaquinas = async (filter = {}) => {
+  try {
+    const resp = await Api.post('/maquina/listar', filter);
+    const dataM = resp.data;
+    console.log('DATA U: ', dataM);
+    return dataM
+    // setData(dataM); 
+  } catch (error) {
+    console.log('DATA U ERROR: ', error);
+    alert('Error al cargar las máquinas');
+  }
+};
+
+
 const Products = () => {
   const [data, setData] = useState([]); // 
   const [areas, setArea] = useState([]);

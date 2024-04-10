@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { IoMdSearch } from "react-icons/io";
 import Api from "../Api";
+import { listarMaquinas } from "../Products/Products";
 
 
 
@@ -11,6 +12,12 @@ const Navbar = ({ }) => {
   }, [])
 
   const [areas, setArea] = useState([]);
+
+  const filtrarPorArea = (filter) => {
+
+    const filterData = { area: filter }
+    listarMaquinas(filterData)
+  }
 
   const listarAreas = async () => {
     try {
