@@ -56,6 +56,7 @@ const Usuario = () => {
 
 
   const openModal = (usuario) => {
+    setErrors([])
     setSelectedUsuario(usuario);
     setIdentificacion(usuario?.identificacion || '');
     setNombres(usuario?.nombres || '');
@@ -412,9 +413,9 @@ const Usuario = () => {
                   className="w-full border border-gray-300 rounded px-3 py-2 mt-1 text-stone-950"
                 >
                   <option className='text-black' value="">seleccione un rol</option>
-                  <option value="usuario">usuario</option>
-                  <option value="tecnico">tecnico</option>
-                  <option value="administrador">administrador</option>
+                  <option value="instructor">Instructor</option>
+                  <option value="tecnico">Tecnico</option>
+                  <option value="administrador">Administrador</option>
                 </select>
                 <div className="text-red-500">{errors.map((error) => error.path == 'rol' ? error.msg : '')}</div>
               </div>
@@ -531,9 +532,9 @@ const Usuario = () => {
                   className="w-full border border-gray-300 rounded px-3 py-2 mt-1 text-stone-950"
                 >
                   <option className='text-black' value="">seleccione un rol</option>
-                  <option className='text-black' value="usuario">Usuario</option>
-                  <option className='text-black' value="tecnico">tecnico</option>
-                  <option className='text-black' value="administrador">administrador</option>
+                  <option value="instructor">Instructor</option>
+                  <option value="tecnico">Tecnico</option>
+                  <option value="administrador">Administrador</option>
                 </select>
                 <div className="text-red-500">{errors.map((error) => error.path == 'rol' ? error.msg : '')}</div>
               </div>
