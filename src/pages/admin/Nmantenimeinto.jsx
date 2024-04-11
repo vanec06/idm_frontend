@@ -11,6 +11,7 @@ import { exportToExcel } from '../../components/Reportes';
 
 const Nmantenimiento = () => {
   const [id_notificacion, setIdNotificacion] = useState('');
+  const [id_maquina, setidMaquina] = useState('');
   const [maquinas, setMaquinas] = useState([]);
   const [selectedMaquina, setSelectedMaquina] = useState(null);
   const [fecha, setFecha] = useState('');
@@ -74,11 +75,13 @@ const Nmantenimiento = () => {
   const openModal = (notificacion_mantenimiento) => {
     setSelectedNotificacion(notificacion_mantenimiento);
     setModalIsOpen(true);
+    console.log('DATA: ', notificacion_mantenimiento);
 
     if (notificacion_mantenimiento) {
+      setidMaquina(notificacion_mantenimiento.id_maquina)
       setIdNotificacion(notificacion_mantenimiento.id_notificacion);
-      setFecha(notificacion_mantenimiento.fecha_mantenimiento);
-      setComentarios(notificacion_mantenimiento.hora_mantenimiento);
+      setFecha(notificacion_mantenimiento.fecha);
+      setComentarios(notificacion_mantenimiento.comentarios);
       setTipoMantenimiento(notificacion_mantenimiento.tipo_mantenimiento);
       setSelectedMaquina({ value: notificacion_mantenimiento.id_maquina, label: notificacion_mantenimiento.nombre_maquina });
     } else {
@@ -134,14 +137,15 @@ const Nmantenimiento = () => {
   };
 
   const handleActualizarNotificacion = async () => {
+    // console.log('ID XD MAQUIN: ', id_maquina);
     const notificacionActualizado = {
       id_notificacion: selectedNotificacion.id_notificacion,
       fecha,
       comentarios,
       tipo_mantenimiento,
-      id_maquina: selectedMaquina.value,
+      id_maquina: selectedMaquina ? selectedMaquina.value : id_maquina,
     };
-
+    // return
     try {
       const response = await fetch(`http://${ruta}:4000/notificacion/actualizar/${notificacionActualizado.id_notificacion}`, {
         method: 'PUT',
@@ -222,8 +226,12 @@ const Nmantenimiento = () => {
     },
     {
       name: 'nombre_maquina',
-      label: 'ID Máquina',
+      label: 'Nombre Máquina',
     },
+    // {
+    //   name: 'id_maquina',
+    //   label: 'ID Máquina',
+    // },
     {
       name: 'acciones',
       label: 'Acciones',
@@ -250,8 +258,8 @@ const Nmantenimiento = () => {
     responsive: 'standard',
     print: false,
     viewColumns: false,
-    download:false,
-    filter:false,
+    download: false,
+    filter: false,
     selectableRows: 'none', // If you don't want checkboxes for row selection
   }
 
@@ -305,7 +313,7 @@ const Nmantenimiento = () => {
                 <input
                   type="date"
                   id="fecha"
-                  value={fecha}
+                  defaultValue={fecha}
                   onChange={(e) => setFecha(e.target.value)}
                   className="w-full border border-gray-300 rounded px-3 py-2 mt-1 text-black"
                   placeholder="Nuevo Fecha"
@@ -337,6 +345,7 @@ const Nmantenimiento = () => {
                   <option value="">Selecciona un tipo de mantenimiento</option>
                   <option value="preventivo">Preventivo</option>
                   <option value="correctivo">Correctivo</option>
+                  <option value="calibracion">calibracion</option>
                 </select>
               </div>
 
@@ -344,7 +353,7 @@ const Nmantenimiento = () => {
                 <label htmlFor="id_maquina" className="block text-sm font-bold text-gray-700">Máquina:</label>
                 <Select
                   id="id_maquina"
-                  value={selectedMaquina}
+                  defaultValue={selectedMaquina}
                   onChange={(option) => setSelectedMaquina(option)}
                   options={maquinas.map(maquina => ({ value: maquina.id_maquina, label: maquina.nombre_maquina }))}
                   className="w-full mt-1  text-black"
@@ -375,7 +384,7 @@ const Nmantenimiento = () => {
           <div className="bg-white w-96 p-6 rounded shadow-lg grid gap-4">
             <h2 className="text-xl font-bold mb-4 text-stone-950">Registrar Notificacion</h2>
             <form>
-        
+
               <div className="mb-4">
                 <label htmlFor="fecha" className="block text-sm font-bold text-gray-700">
                   Fecha:
@@ -415,6 +424,7 @@ const Nmantenimiento = () => {
                   <option value="">Selecciona un tipo de mantenimiento</option>
                   <option value="preventivo">Preventivo</option>
                   <option value="correctivo">Correctivo</option>
+                  <option value="calibracion">calibracion</option>
                 </select>
               </div>
 
