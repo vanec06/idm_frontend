@@ -7,19 +7,6 @@ import { IoMdSearch } from "react-icons/io";
 import isEmpty from 'lodash/isEmpty';
 import { Link } from 'react-router-dom';
 
-export const listarMaquinas = async (filter = {}) => {
-  try {
-    const resp = await Api.post('/maquina/listar', filter);
-    const dataM = resp.data;
-    console.log('DATA U: ', dataM);
-    return dataM
-    // setData(dataM); 
-  } catch (error) {
-    console.log('DATA U ERROR: ', error);
-    alert('Error al cargar las máquinas');
-  }
-};
-
 
 const Products = () => {
   const [data, setData] = useState([]); // 
@@ -43,7 +30,7 @@ const Products = () => {
       console.log('DATA U: ', isEmpty(filter));
       console.log('FILTER MAIN: ', filter);
       setData(dataM)
-      if (dataM.length > 0 && !('limite' in filter)) {
+      if (dataM.length > 0 && !('limite' in filter) || ('buscar' in filter)) {
         setDisabledBuscar(false)
       } else {
         setDisabledBuscar(true)
@@ -56,14 +43,14 @@ const Products = () => {
   };
 
   const filtrarPorArea = (data) => {
-    if (data) {
+    if (data != 'null') {
       const filtro = { area: data }
       listarMaquinas(filtro)
       listarAmbiente(data)
       setDisabled(false)
       setDisabledBuscar(false)
     } else {
-      listarMaquinas({ limite: true })
+      listarMaquinas({ limite: true, area: 'null', ambiente: 'null' })
       selectedOption('')
       setDisabledBuscar(true)
       setDisabled(true)
@@ -72,6 +59,7 @@ const Products = () => {
 
   const filtrarPorAmbiente = (data) => {
     const filtro = { ambiente: data }
+    console.log('FILTRO AMBIENTE: ', data);
     listarMaquinas(filtro)
     selectedOption(data)
     // if (data) {
@@ -122,6 +110,8 @@ const Products = () => {
   const buscarMaquina = async () => {
     if (buscar != '') {
       listarMaquinas({ buscar: buscar })
+    } else {
+      listarMaquinas({ buscar: 'null' })
     }
   }
 
@@ -133,58 +123,58 @@ const Products = () => {
 
             {/* SECCIONES */}
             <div className="fixed top-0 left-0 w-full bg-gray-100 shadow-md">
-  <div className="container mx-auto px-4 py-3">
-    <div className="flex justify-between items-center gap-4">
-      {/* BUSCAR */}
-      <div className="relative group flex-grow">
-        <input 
-          disabled={disableBuscar}
-          onChange={valueBuscar}
-          type="text"
-          placeholder="Buscar"
-          className="search-bar pl-10 text-gray-700 bg-gray-200 rounded-full py-2 px-4 focus:outline-none focus:bg-white focus:border-gray-500 transition-colors duration-300 ease-in-out w-full"
-        />
-        {!disableBuscar && (
-          <IoMdSearch 
-            className="absolute left-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-600 hover:text-gray-700 transition-colors duration-300 ease-in-out"
-            onClick={() => buscarMaquina()}
-          />
-        )}
-      </div>
+              <div className="container mx-auto px-4 py-3">
+                <div className="flex justify-between items-center gap-4">
+                  {/* BUSCAR */}
+                  <div className="relative group flex-grow">
+                    <input
+                      disabled={disableBuscar}
+                      onChange={valueBuscar}
+                      type="text"
+                      placeholder="Buscar"
+                      className="search-bar pl-10 text-gray-700 bg-gray-200 rounded-full py-2 px-4 focus:outline-none focus:bg-white focus:border-gray-500 transition-colors duration-300 ease-in-out w-full"
+                    />
+                    {!disableBuscar && (
+                      <IoMdSearch
+                        className="absolute left-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-600 hover:text-gray-700 transition-colors duration-300 ease-in-out"
+                        onClick={() => buscarMaquina()}
+                      />
+                    )}
+                  </div>
 
-      {/* SELECT DE AREA */}
-      <select 
-        className="select-style"
-        onChange={(e) => filtrarPorArea(e.target.value)}
-      >
-        <option value={''}>Seleccione un área</option>
-        {areas.map((index) => (
-          <option key={index.id_area} value={index.id_area}>{index.nombre}</option>
-        ))}
-      </select>
+                  {/* SELECT DE AREA */}
+                  <select
+                    className="select-style"
+                    onChange={(e) => filtrarPorArea(e.target.value)}
+                  >
+                    <option value={'null'}>Seleccione un área</option>
+                    {areas.map((index) => (
+                      <option key={index.id_area} value={index.id_area}>{index.nombre}</option>
+                    ))}
+                  </select>
 
-      {/* SELECT DE AMBIENTE */}
-      <select 
-        disabled={disable} 
-        className="select-style"
-        value={valueAmbiente} 
-        onChange={(e) => filtrarPorAmbiente(e.target.value)}
-      >
-        <option value={''}>Seleccione un ambiente</option>
-        {ambientes.map((index) => (
-          <option key={index.id_ambiente} value={index.id_ambiente}>{index.nombre}</option>
-        ))}
-      </select>
+                  {/* SELECT DE AMBIENTE */}
+                  <select
+                    disabled={disable}
+                    className="select-style"
+                    value={valueAmbiente}
+                    onChange={(e) => filtrarPorAmbiente(e.target.value)}
+                  >
+                    <option value={'null'}>Seleccione un ambiente</option>
+                    {ambientes.map((index) => (
+                      <option key={index.id_ambiente} value={index.id_ambiente}>{index.nombre}</option>
+                    ))}
+                  </select>
 
-      {/* Botón de Iniciar Sesión */}
-      <Link to="/login"> 
-        <button className="bg-blue-500 hover:bg-blue-600 font-semibold py-2 px-4 rounded transition duration-300 ease-in-out">
-          Iniciar Sesión
-        </button>
-      </Link>
-    </div>
-  </div>
-</div>
+                  {/* Botón de Iniciar Sesión */}
+                  <Link to="/login">
+                    <button className="bg-blue-500 hover:bg-blue-600 font-semibold py-2 px-4 rounded transition duration-300 ease-in-out">
+                      Iniciar Sesión
+                    </button>
+                  </Link>
+                </div>
+              </div>
+            </div>
 
 
           </div>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { IoMdSearch } from "react-icons/io";
 import Api from "../Api";
-import { listarMaquinas } from "../Products/Products";
+// import { listarMaquinas } from "../Products/Products";
 
 
 

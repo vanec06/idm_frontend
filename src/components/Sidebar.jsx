@@ -147,14 +147,6 @@ const Sidebar = ({ usuario }) => {
               </Link>
               : ''}
           </li>
-          <li>
-            {usuario.rol == 'administrador' || usuario.rol == 'usuario' ?
-              <Link to="/inventario" style={styles.menuItem}>
-                <FaUser style={styles.menuIcon} /> Vista Usuario
-              </Link>
-              : ''}
-          </li>
-
         </ul>
         <div style={styles.logoutContainer}>
           <Link
