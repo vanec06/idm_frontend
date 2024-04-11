@@ -5,7 +5,7 @@ const CountUsu = () => {
   const [lastUsers, setLastUsers] = useState([]);
 
   useEffect(() => {
-    const dataToSend = { limite: true };
+    const dataToSend = { limiteMain: true };
 
     fetch(`http://${ruta}:4000/maquina/listar`, {
       method: 'POST',

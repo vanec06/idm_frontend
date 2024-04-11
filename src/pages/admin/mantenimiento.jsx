@@ -96,7 +96,7 @@ const Mantenimiento = () => {
       id_maquina: selectedMaquina.value,
     };
     try {
-      const response = await fetch('http://localhost:4000/notificacion/registrar', {
+      const response = await fetch(`http://${ruta}:4000/notificacion/registrar`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
