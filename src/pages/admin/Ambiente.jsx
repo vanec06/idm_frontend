@@ -32,8 +32,9 @@ const Ambiente = () => {
   }, []);
 
   const listarUsuarios = async () => {
+
     try {
-      const response = await fetch(`http://${ruta}:4000/usuario/listar`);
+      const response = await fetch(`http://${ruta}:4000/usuario/listar/` + true,);
       const data = await response.json();
 
       if (response.ok) {
@@ -87,10 +88,10 @@ const Ambiente = () => {
 
   const listarAmbientes = async () => {
     try {
-      const response = await fetch(`http://${ruta}:4000/ambiente/listar`, 
-    {
-      method: 'POST'
-    });
+      const response = await fetch(`http://${ruta}:4000/ambiente/listar`,
+        {
+          method: 'POST'
+        });
       const data = await response.json();
 
       if (response.ok) {
@@ -112,7 +113,7 @@ const Ambiente = () => {
       setnombre(ambiente.nombre);
       setUsuarioId(ambiente.id_usuario)
       setAreaId(ambiente.area_id_area)
-      console.log('XD:; ', ambiente.id_usuario);
+      // console.log('XD:; ', ambiente.id_usuario);
       // setnombre(ambiente.nombre);
     }
   };
@@ -163,7 +164,7 @@ const Ambiente = () => {
       id_ambiente: selectedAmbiente.id_ambiente,
       area_id_area: selectedArea ? selectedArea.value : areaId,
       id_usuario: selectedUsuario ? selectedUsuario.value : usuarioId,
-      nombre,
+      nombre: nombre
     };
 
     const response = await fetch(`http://${ruta}:4000/ambiente/actualizar/${ambienteActualizado.id_ambiente}`, {
@@ -292,17 +293,24 @@ const Ambiente = () => {
                   className="w-full border border-gray-300 rounded px-3 py-2 mt-1 text-black"
                   placeholder="Nuevo Nombre"
                 />
-                <div className="text-red-500">{errors.length > 0 ? errors[0].msg : ''}</div>
+                <div className="text-red-500">{errors.map((error) => error.path == 'nombre' ? error.msg : '')}</div>
+
               </div>
 
               <div className="mb-4">
                 <label htmlFor="id_usuario" className="block text-sm font-bold text-gray-700">Usuario:</label>
-                {/* {console.log('mmm: ',  usuarioId)} */}
+                {/* {console.log('AREAS: ',  areas)}
+                {console.log('ID AREA: ',  areaId)}
+                {console.log('AREASIBJET: ',  areas.find(area => area.id_area === areaId)?.nombre || '' )}
+                {console.log('OBJE: ',  usuarios)}
+                {console.log('IDUS: ',  usuarioId)}
+                {console.log('mmm: ',  usuarios.find(usuario => usuario.id_usuario === usuarioId))} */}
                 <Select
                   id="id_usuario"
-                  defaultValue={{ value: usuarioId, label: usuarios.find(usuario => usuario.id_usuario === usuarioId)?.nombres || '' }}
                   onChange={(option) => setSelectedUsuario(option)}
-                  options={usuarios.map(usuario => ({ value: usuario.id_usuario, label: usuario.identificacion }))}
+                  defaultValue={{ value: usuarioId, label: usuarios.find(usuario => usuario.id_usuario === usuarioId)?.nombres || '' }}
+                  options={usuarios.map(usuario => ({ value: usuario.id_usuario, label: usuario.nombres + ',' + usuario.identificacion }))}
+
                   className="w-full mt-1 text-black"
                   placeholder="Selecciona el ID del usuario"
                 />
@@ -356,7 +364,8 @@ const Ambiente = () => {
                   className="w-full border border-gray-300 rounded px-3 py-2 mt-1 text-stone-950"
                   placeholder="Nuevo Ambiente"
                 />
-                <div className="text-red-500">{errors.length > 0 ? errors[0].msg : ''}</div>
+                <div className="text-red-500">{errors.map((error) => error.path == 'nombre' ? error.msg : '')}</div>
+
               </div>
               <div className="mb-4">
                 <label htmlFor="id_usuario" className="block text-sm font-bold text-gray-700">Usuario:</label>

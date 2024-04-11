@@ -507,7 +507,7 @@ const Maquina = () => {
 
   return (
     <div>
-      <h2 className="text-black text-3xl font-bold mb-5 px-6 w-full">LISTA DE EQUIPOS</h2>
+      <h2 className="text-black text-3xl font-bold mb-5 px-6 w-full">Lista De Máquinas</h2>
       <div className='justify-between px-4'>
         <div>
           <button className='text-white w-40 h-10 bg-green-600 rounded-md' onClick={() => openModal(null)}>

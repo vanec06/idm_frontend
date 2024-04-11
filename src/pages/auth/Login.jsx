@@ -34,6 +34,8 @@ const Login = () => {
         navigate(redirectTo);
       } else {
         const errorData = await response.json();
+        console.error("Error en la autenticación:", errorData.message);
+    
         setError(errorData.message);
       }
     } catch (error) {
@@ -64,7 +66,7 @@ const Login = () => {
               placeholder="Identificacion"
             />
           </div>
-          <div className="relative mb-8">
+          <div className="relative">
             <RiLockLine className="login-icon" />
             <input
               type={showPassword ? "text" : "password"}
@@ -85,6 +87,8 @@ const Login = () => {
               />
             )}
           </div>
+          <div className='text-red-500 text-[11px] mb-8 h-[10px]'>{error}</div>
+
           <div>
             <button
               type="submit"

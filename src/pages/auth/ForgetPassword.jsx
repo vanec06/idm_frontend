@@ -87,7 +87,7 @@ const ForgetPassword = () => {
           <span className="forget-password-link">
             ¿Ya tienes cuenta?{" "}
             <Link
-              to="/"
+              to="/login"
               className="forget-password-link-text"
             >
               Ingresa

@@ -120,7 +120,7 @@ const Products = () => {
 
   return (
     <div>
-      <div className="bg-gray-900:text-white duration-200 relative z-40">
+      <div className=" text-black duration-200 relative z-40">
         <div className="py-4">
           <div className="container flex justify-between items-center  fixed top-8">
 
@@ -171,7 +171,7 @@ const Products = () => {
 
                   {/* Botón de Iniciar Sesión */}
                   <Link to="/login">
-                    <button className="bg-blue-500 hover:bg-blue-600 font-semibold py-2 px-4 rounded transition duration-300 ease-in-out">
+                    <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition duration-300 ease-in-out">
                       Iniciar Sesión
                     </button>
                   </Link>

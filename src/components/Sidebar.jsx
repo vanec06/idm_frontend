@@ -35,7 +35,7 @@ const Sidebar = ({ usuario }) => {
   //   setContador(contador + 1);
   // };
 
-  const listarNotificaciones = async () => {
+   const listarNotificaciones = async () => {
     try {
       const response = await Api.post(`http://${ruta}:4000/notificacion/listar`, { filtro: true });
       const data = response.data;
@@ -180,82 +180,83 @@ const Sidebar = ({ usuario }) => {
               gap: "20px",
             }}
           >
-            {/* Menú de notificaciones */}
-            <Menu
-              menuButton={
-                <MenuButton
-                  style={{
-                    position: "relative",
-                    padding: "10px",
-                    borderRadius: "10px",
-                    color: "#fff",
-                    cursor: "pointer",
-                    backgroundColor: "transparent",
-                  }}
-                >
-                  <RiNotification3Line style={{ fontSize: "20px" }} />
-                  <span
+            {usuario.rol == 'administrador' ?
+
+              <Menu
+                menuButton={
+                  <MenuButton
                     style={{
-                      position: "absolute",
-                      top: "-5px",
-                      right: "-5px",
-                      backgroundColor: "#f00",
-                      padding: "3px 6px",
-                      borderRadius: "50%",
-                      fontSize: "10px",
-                      fontWeight: "bold",
+                      position: "relative",
+                      padding: "10px",
+                      borderRadius: "10px",
                       color: "#fff",
+                      cursor: "pointer",
+                      backgroundColor: "transparent",
                     }}
                   >
-                    {contador}
-                  </span>
-                </MenuButton>
-              }
-              align="end" arrowClassName="bg-secondary-100" menuClassName="bg-secondary-100 p-4 w-[500px]"
-            >
-              {/* Contenido del menú de notificaciones */}
-              <h1
-                style={{
-                  color: "#ccc",
-                  textAlign: "center",
-                  fontWeight: "bold",
-                  fontSize: "16px",
-                }}
+                    <RiNotification3Line style={{ fontSize: "20px" }} />
+                    <span
+                      style={{
+                        position: "absolute",
+                        top: "-5px",
+                        right: "-5px",
+                        backgroundColor: "#f00",
+                        padding: "3px 6px",
+                        borderRadius: "50%",
+                        fontSize: "10px",
+                        fontWeight: "bold",
+                        color: "#fff",
+                      }}
+                    >
+                      {contador}
+                    </span>
+                  </MenuButton>
+                }
+                align="end" arrowClassName="bg-secondary-100" menuClassName="bg-secondary-100 p-4 w-[500px]"
               >
-                Notificaciones {notificaciones.length}
-              </h1>
-              <hr style={{ margin: "6px 0", borderColor: "#ccc" }} />
+                {/* Contenido del menú de notificaciones */}
+                <h1
+                  style={{
+                    color: "#ccc",
+                    textAlign: "center",
+                    fontWeight: "bold",
+                    fontSize: "16px",
+                  }}
+                >
+                  Notificaciones {notificaciones.length}
+                </h1>
+                <hr style={{ margin: "6px 0", borderColor: "#ccc" }} />
 
-              <div className="flex flex-col w-full gap-2">
-                {notificaciones.map((notificacion) =>
-                  <div key={notificacion.id_notificacion} className="bg-gray-700 flex">
+                <div className="flex flex-col w-full gap-2">
+                  {notificaciones.map((notificacion) =>
+                    <div key={notificacion.id_notificacion} className="bg-gray-700 flex">
 
-                    <span className="block p-2 text-white w-full" key={notificacion.id_notificacion}>{notificacion.comentarios}</span>
-                    <div className="flex justify-end w-max gap-2 items-center">
-                      {notificacion.estado == 'aceptar' ? (<p className="flex bg-green-100 rounded-full text-green-600 items-center h-[24px]"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                      </svg>
-                      </p>) :
+                      <span className="block p-2 text-white w-full" key={notificacion.id_notificacion}>{notificacion.comentarios}</span>
+                      <div className="flex justify-end w-max gap-2 items-center">
+                        {notificacion.estado == 'aceptar' ? (<p className="flex bg-green-100 rounded-full text-green-600 items-center h-[24px]"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                        </svg>
+                        </p>) :
 
-                        (
-                          <>
-                            <button className="bg-blue-200 text-center p-2 h-[40px] rounded" onClick={() => cambiarEstado(1, notificacion.id_notificacion, notificacion.comentarios)}>Aceptar</button>
-                            <button className="bg-red-300 text-center p-2 h-[40px] rounded" onClick={() => cambiarEstado(2, notificacion.id_notificacion, notificacion.comentarios)}>Omitir</button>
-                          </>
-                        )
-                      }
+                          (
+                            <>
+                              <button className="bg-blue-200 text-center p-2 h-[40px] rounded" onClick={() => cambiarEstado(1, notificacion.id_notificacion, notificacion.comentarios)}>Aceptar</button>
+                              <button className="bg-red-300 text-center p-2 h-[40px] rounded" onClick={() => cambiarEstado(2, notificacion.id_notificacion, notificacion.comentarios)}>Omitir</button>
+                            </>
+                          )
+                        }
+                      </div>
                     </div>
-                  </div>
-                )}
-                <p style={{ color: "#999", fontSize: "10px" }}>
+                  )}
+                  <p style={{ color: "#999", fontSize: "10px" }}>
 
-                </p>
-              </div>
+                  </p>
+                </div>
 
-              {/* Resto de notificaciones */}
-            </Menu>
+                {/* Resto de notificaciones */}
+              </Menu>
+              : ''}
             {/* Menú de perfil */}
-            {usuario.rol != 'tecnico' ?   
             <Menu
               menuButton={
                 <MenuButton
@@ -280,7 +281,7 @@ const Sidebar = ({ usuario }) => {
                       objectFit: "cover",
                     }}
                   />
-                  <span>Usuario </span>
+                  <span>{usuario.rol} </span>
                   <RiArrowDownSLine />
                 </MenuButton>
               }
@@ -294,36 +295,39 @@ const Sidebar = ({ usuario }) => {
               <MenuItem
                 style={{ padding: "0", backgroundColor: "transparent" }}
               >
-                <Link
-                  to="/sidebar/perfil"
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    color: "#ccc",
-                    gap: "10px",
-                    padding: "10px 20px",
-                    borderRadius: "5px",
-                    textDecoration: "none",
-                  }}
-                >
-                  <img
-                    src="../public/img/user.jpg"
-                    alt="Profile"
+                {usuario.rol != 'tecnico' ?
+
+                  <Link
+                    to="/sidebar/perfil"
                     style={{
-                      width: "40px",
-                      height: "40px",
-                      borderRadius: "50%",
-                      objectFit: "cover",
+                      display: "flex",
+                      alignItems: "center",
+                      color: "#ccc",
+                      gap: "10px",
+                      padding: "10px 20px",
+                      borderRadius: "5px",
+                      textDecoration: "none",
                     }}
-                  />
+                  >
+                    <img
+                      src="../public/img/user.jpg"
+                      alt="Profile"
+                      style={{
+                        width: "40px",
+                        height: "40px",
+                        borderRadius: "50%",
+                        objectFit: "cover",
+                      }}
+                    />
                     <div style={{ flex: "1" }}>
-                    <span style={{ fontSize: "15px" }}>Usuario</span>
-                    <span style={{ color: "#999", fontSize: "13px" }}> <br />
-                      Ver perfil
-                    </span>
-                  </div>
-            
-                </Link>
+                      <span style={{ fontSize: "15px" }}>{usuario.rol}</span>
+                      <span style={{ color: "#999", fontSize: "13px" }}> <br />
+                        Ver perfil
+                      </span>
+                    </div>
+
+                  </Link>
+                  : <p className="text-white">Usuario Tenico</p>}
               </MenuItem>
               <hr style={{ margin: "4px 0", borderColor: "#ccc" }} />
               {/* Enlaces del menú de perfil */}
@@ -336,7 +340,6 @@ const Sidebar = ({ usuario }) => {
               >
               </MenuItem>
             </Menu>
-             : ''}
           </nav>
         </header>
       </div>

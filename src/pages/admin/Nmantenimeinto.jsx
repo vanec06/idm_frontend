@@ -126,6 +126,10 @@ const Nmantenimiento = () => {
       if (response.ok) {
         listarNotificaciones();
         closeModal();
+        Swal.fire({
+          icon: 'success',
+          title: 'Notificación registrado correctamente',
+        });
         toast.success('Notificación de mantenimiento registrada correctamente!');
       } else {
         setErrors(responseData.errors || ['Error al registrar la notificación']);
@@ -154,13 +158,18 @@ const Nmantenimiento = () => {
         },
         body: JSON.stringify(notificacionActualizado),
       });
+      
 
       const responseData = await response.json();
 
       if (response.ok) {
         listarNotificaciones();
         closeModal();
-        toast.success('Notificación de mantenimiento actualizada correctamente!');
+        Swal.fire({
+          icon: 'success',
+          title: 'Notificación actualizada correctamente',
+        });
+        toast.success('Notificación de notificación actualizada correctamente!');
       } else {
         setErrors(responseData.errors || ['Error al actualizar la notificación']);
       }
@@ -173,7 +182,7 @@ const Nmantenimiento = () => {
   const handleEliminarNotificacion = async (id_notificacion) => {
     Swal.fire({
       title: '¿Estás seguro?',
-      text: 'Esta acción eliminará el mantenimiento permanentemente.',
+      text: 'Esta acción eliminará el notificación permanentemente.',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Sí, eliminar',
@@ -193,14 +202,14 @@ const Nmantenimiento = () => {
           listarNotificaciones();
           Swal.fire({
             icon: 'success',
-            title: 'Mantenimiento eliminado correctamente',
+            title: 'Notificación eliminada correctamente',
           });
         } catch (error) {
-          console.error('Error al eliminar mantenimiento:', error);
+          console.error('Error al eliminar notificación:', error);
           Swal.fire({
             icon: 'error',
-            title: 'Error al eliminar mantenimiento',
-            text: 'Ocurrió un error al intentar eliminar el mantenimiento.',
+            title: 'Error al eliminar notificación',
+            text: 'Ocurrió un error al intentar eliminar la notificación.',
           });
         }
       }
@@ -228,10 +237,10 @@ const Nmantenimiento = () => {
       name: 'nombre_maquina',
       label: 'Nombre Máquina',
     },
-    // {
-    //   name: 'id_maquina',
-    //   label: 'ID Máquina',
-    // },
+    {
+      name: 'estado',
+      label: 'Estado',
+    },
     {
       name: 'acciones',
       label: 'Acciones',
@@ -265,7 +274,7 @@ const Nmantenimiento = () => {
 
   return (
     <div>
-      <h2 className="text-black text-3xl font-bold mb-5 px-6 w-full">Lista de Notificacions</h2>
+      <h2 className="text-black text-3xl font-bold mb-5 px-6 w-full">Lista de Notificaciones</h2>
       <div className="justify-between px-4">
         <div>
           <button className="text-white w-40 h-10 bg-green-600 rounded-md" onClick={() => openModal(null)}>
@@ -327,7 +336,7 @@ const Nmantenimiento = () => {
                 <input
                   type="text"
                   id="comentarios"
-                  value={comentarios}
+                  defaultValue={comentarios}
                   onChange={(e) => setComentarios(e.target.value)}
                   className="w-full border border-gray-300 rounded px-3 py-2 mt-1 text-black"
                   placeholder="Nuevo Comentario"
@@ -338,7 +347,7 @@ const Nmantenimiento = () => {
                 <label htmlFor="tipo_mantenimiento" className="block text-sm font-bold text-gray-700">Tipo Mantenimiento:</label>
                 <select
                   id="tipo_mantenimiento"
-                  value={tipo_mantenimiento}
+                  defaultValue={tipo_mantenimiento}
                   onChange={(e) => setTipoMantenimiento(e.target.value)}
                   className="w-full border border-gray-300 rounded px-3 py-2 mt-1 text-stone-950 "
                 >
