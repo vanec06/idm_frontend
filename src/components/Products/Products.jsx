@@ -105,6 +105,9 @@ const Products = () => {
   const valueBuscar = (event) => {
     console.log('VAU: ', event.target.value);
     setBuscar(event.target.value)
+    if (event.target.value == '') {
+      listarMaquinas({ buscar: 'null' })
+    }
   }
 
   const buscarMaquina = async () => {
