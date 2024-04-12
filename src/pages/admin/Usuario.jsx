@@ -118,10 +118,18 @@ const Usuario = () => {
         body: JSON.stringify(nuevoUsuario),
       });
       const responseData = await response.json();
-
+  
       if (responseData.errors) {
         setErrors(responseData.errors);
-      } else {
+      } 
+      else if(responseData.status=='existente'){
+        Swal.fire({
+          icon: 'error',
+          title: 'Usuario Existente',
+        });
+      }
+      
+      else {
         closeModal();
         Swal.fire({
           icon: 'success',

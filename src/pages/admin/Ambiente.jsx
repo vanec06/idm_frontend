@@ -312,7 +312,7 @@ const Ambiente = () => {
                   options={usuarios.map(usuario => ({ value: usuario.id_usuario, label: usuario.nombres + ',' + usuario.identificacion }))}
 
                   className="w-full mt-1 text-black"
-                  placeholder="Selecciona el ID del usuario"
+                  placeholder="Selecciona un usuario"
                 />
                 <div className="text-red-500">{errors.map((error) => error.path == 'id_usuario' ? error.msg : '')}</div>
               </div>
@@ -375,7 +375,7 @@ const Ambiente = () => {
                   onChange={(option) => setSelectedUsuario(option)}
                   options={usuarios.map(usuario => ({ value: usuario.id_usuario, label: usuario.nombres + ',' + usuario.identificacion }))}
                   className="w-full mt-1 text-black"
-                  placeholder="Selecciona el ID del usuario"
+                  placeholder="Selecciona un usuario"
                 />
                 <div className="text-red-500">{errors.map((error) => error.path == 'id_usuario' ? error.msg : '')}</div>
               </div>

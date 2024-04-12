@@ -566,7 +566,7 @@ const Maquina = () => {
                     value={nombre}
                     onChange={(e) => setNombre(e.target.value)}
                     className="w-full border border-gray-300 rounded px-3 py-2 mt-1 text-stone-950"
-                    placeholder="nombre"
+                    placeholder="Nombre"
                   />
                   <div className="text-red-500">{errors.map((error) => error.path == 'nombre' ? error.msg : '')}</div>
                 </div>
@@ -762,7 +762,7 @@ const Maquina = () => {
                     value={nombre}
                     onChange={(e) => setNombre(e.target.value)}
                     className="w-full border border-gray-300 rounded px-3 py-2 mt-1 text-black"
-                    placeholder="nombre"
+                    placeholder="Nombre"
                   />
                   <div className="text-red-500">{errors.map((error) => error.path == 'nombre' ? error.msg : '')}</div>
                 </div>
