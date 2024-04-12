@@ -25,7 +25,7 @@ const CountUsu = () => {
 
   return (
     <div className="mt-8">
-      <h2 className="text-3xl font-bold mb-5 px-6 w-96">Ultimas máquinas registradas</h2>
+      <h2 className="text-3xl font-bold mb-5 px-6 w-96 text-black">Ultimas máquinas registradas</h2>
       {lastUsers && lastUsers.length > 0 ? (
         <table className="min-w-full divide-y divide-gray-200 shadow-sm rounded-lg overflow-hidden">
           <thead className="bg-blue-900">

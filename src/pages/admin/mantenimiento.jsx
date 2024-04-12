@@ -508,7 +508,7 @@ const Mantenimiento = () => {
                   defaultValue={{ value: usuarioId, label: usuarios.find(usuario => usuario.id_usuario === usuarioId)?.nombres || '' }}
                   options={usuarios.map(usuario => ({ value: usuario.id_usuario, label: usuario.identificacion }))}
                   className="w-full mt-1 text-black"
-                  placeholder="Selecciona el ID del usuario"
+                  placeholder="Selecciona un usuario"
                 />
                 <div className="text-red-500">{errors.map((error) => error.path == 'id_usuario' ? error.msg : '')}</div>
               </div>
@@ -606,7 +606,7 @@ const Mantenimiento = () => {
                   onChange={(option) => setSelectedMaquina(option)}
                   options={maquinas.map(maquina => ({ value: maquina.id_maquina, label: maquina.nombre_maquina }))}
                   className="w-full mt-1 text-black"
-                  placeholder="Selecciona el ID de la máquina"
+                  placeholder="Selecciona una máquina"
                 />
                 <div className="text-red-500">{errors.map((error) => error.path === 'id_maquina' ? error.msg : '')}</div>
               </div>
@@ -619,7 +619,7 @@ const Mantenimiento = () => {
                   onChange={(option) => setSelectedUsuario(option)}
                   options={usuarios.map(usuario => ({ value: usuario.id_usuario, label: usuario.identificacion }))}
                   className="w-full mt-1 text-black"
-                  placeholder="Selecciona el ID del usuario"
+                  placeholder="Selecciona un usuario"
                 />
                 <div className="text-red-500">{errors.map((error) => error.path == 'id_usuario' ? error.msg : '')}</div>
               </div>
@@ -698,6 +698,8 @@ const Mantenimiento = () => {
                 <option value="">Selecciona un tipo de mantenimiento</option>
                 <option value="preventivo">Preventivo</option>
                 <option value="correctivo">Correctivo</option>
+                <option value="calibracion">Calibracion</option>
+
               </select>
             </div>
 
