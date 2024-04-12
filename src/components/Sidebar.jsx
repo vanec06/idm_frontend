@@ -293,42 +293,75 @@ const Sidebar = ({ usuario }) => {
             >
               {/* Contenido del menú de perfil */}
               <MenuItem
-                style={{ padding: "0", backgroundColor: "transparent" }}
-              >
-                {usuario.rol != 'tecnico' ?
+  style={{ padding: "0", backgroundColor: "transparent" }}
+>
+  {usuario.rol !== 'tecnico' ? (
+    <Link
+    to="/sidebar/perfil"
+    style={{
+      display: "flex",
+      alignItems: "center",
+      color: "#ccc",
+      gap: "10px",
+      padding: "10px 20px",
+      borderRadius: "5px",
+      textDecoration: "none",
+    }}
+  >
+    <img
+      src="../public/img/user.jpg"
+      alt="Profile"
+      style={{
+        width: "40px",
+        height: "40px",
+        borderRadius: "50%",
+        objectFit: "cover",
+        transform: "translateY(-40px)"
+      }}
+    />
+    <div style={{ flex: "1" }}>
+      <span className="capitalize" style={{ fontSize: "15px" }}>
+        {usuario.rol}
+      </span>
+      <span style={{ color: "#999", fontSize: "13px" }}>
+        <br />
+        Ver perfil
+      </span>
+      <h2 className="mt-5">Manual de Administrador</h2>
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <a
+          href="../../public/Manuales/Manual admin.pdf"
+          download
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+          style={{ textDecoration: "none" }}
+          onClick={(e) => {
+            e.preventDefault();
+            window.location.href = e.target.href;
+          }}
+        >
+          Descargar PDF
+        </a>
+      </div>
+    </div>
+  </Link>
+  
+  ) : (
+    <div>
+      <p className="text-white text-lg">Manual Técnico</p>
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <a
+          href="../../public/Manuales/Manual del tecnico.pdf"
+          download
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+          style={{ textDecoration: "none" }}
+        >
+          Descargar PDF
+        </a>
+      </div>
+    </div>
+  )}
+</MenuItem>
 
-                  <Link
-                    to="/sidebar/perfil"
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      color: "#ccc",
-                      gap: "10px",
-                      padding: "10px 20px",
-                      borderRadius: "5px",
-                      textDecoration: "none",
-                    }}
-                  >
-                    <img
-                      src="../public/img/user.jpg"
-                      alt="Profile"
-                      style={{
-                        width: "40px",
-                        height: "40px",
-                        borderRadius: "50%",
-                        objectFit: "cover",
-                      }}
-                    />
-                    <div style={{ flex: "1" }}>
-                      <span className="capitalize" style={{ fontSize: "15px" }}>{usuario.rol}</span>
-                      <span style={{ color: "#999", fontSize: "13px" }}> <br />
-                        Ver perfil
-                      </span>
-                    </div>
-
-                  </Link>
-                  : <p className="text-white">Usuario Tecnico</p>}
-              </MenuItem>
               <hr style={{ margin: "4px 0", borderColor: "#ccc" }} />
               {/* Enlaces del menú de perfil */}
               <MenuItem
