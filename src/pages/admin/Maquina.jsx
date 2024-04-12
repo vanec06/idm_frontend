@@ -507,7 +507,7 @@ const Maquina = () => {
 
   return (
     <div>
-      <h2 className="text-black text-3xl font-bold mb-5 px-6 w-full">Lista De Máquinas</h2>
+      <h2 className="text-black text-3xl font-bold mb-5 px-6 w-full">Lista De Equipos</h2>
       <div className='justify-between px-4'>
         <div>
           <button className='text-white w-40 h-10 bg-green-600 rounded-md' onClick={() => openModal(null)}>
@@ -518,7 +518,7 @@ const Maquina = () => {
       </div>
       <div className="mt-8 mx-6">
         <MUIDataTable
-          title={"Maquinas"}
+          title={"Equipos"}
           data={maquinas.map(maquina => [maquina.id_maquina, maquina.nombre_maquina, maquina.marca, maquina.placa, maquina.modelo, maquina.manual, maquina.serial, maquina.imagen, maquina.descripcion, maquina.estado, maquina.nombre_area, maquina.nombre_ambiente, maquina.estado_maquina])}
           columns={columns}
           options={options}
@@ -540,7 +540,7 @@ const Maquina = () => {
             <form>
 
               <div className="  col-span-1">
-                <h2 className="text-xl font-bold mb-4 text-black">ACTUALIZAR EQUIPOS</h2>
+                <h2 className="text-xl font-bold mb-4 text-black">Actualizar Equipo</h2>
                 {/* Columna 1 */}
 
                 <div className="mb-4">
@@ -733,7 +733,7 @@ const Maquina = () => {
                   className="text-white font-bold hover:bg-blue-800 w-40 h-10 bg-blue-600 rounded"
                   onClick={handleActualizarMaquina}
                 >
-                  Actualizar Máquina
+                  Actualizar Equipo
                 </button>
                 <button
                   className="bg-gray-500 hover:bg-gray-800 text-white font-bold py-2 px-8 rounded"
@@ -750,7 +750,7 @@ const Maquina = () => {
             <form>
 
               <div className="  col-span-1">
-                <h2 className="text-xl font-bold mb-4 text-black">Registrar Máquina</h2>
+                <h2 className="text-xl font-bold mb-4 text-black">Registrar Equipo</h2>
 
                 <div className="mb-4">
                   <label htmlFor="nombre_maquina" className="block text-sm font-bold text-gray-700">
@@ -854,7 +854,7 @@ const Maquina = () => {
               </div>
               <div className="mb-4">
                 <label htmlFor="descripcion" className="block text-sm font-bold text-gray-700">
-                  Descripcion:
+                  Descripción:
                 </label>
                 <input
                   type="text"
@@ -862,7 +862,7 @@ const Maquina = () => {
                   value={descripcion}
                   onChange={(e) => setDescripcion(e.target.value)}
                   className="w-full border border-gray-300 rounded px-3 py-2 mt-1 text-black"
-                  placeholder="Descripcion"
+                  placeholder="Descripción"
                 />
                 <div className="text-red-500">{errors.map((error) => error.path == 'descripcion' ? error.msg : '')}</div>
               </div>
@@ -919,7 +919,7 @@ const Maquina = () => {
                   className="text-white font-bold hover:bg-green-800 w-40 h-10 bg-green-600 rounded"
                   onClick={handleRegistrarMaquina}
                 >
-                  Registrar Máquina
+                  Registrar Equipo
                 </button>
                 <button
                   type='button'

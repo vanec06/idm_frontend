@@ -281,7 +281,7 @@ const Sidebar = ({ usuario }) => {
                       objectFit: "cover",
                     }}
                   />
-                  <span>{usuario.rol} </span>
+                  <span className="capitalize">{usuario.rol} </span>
                   <RiArrowDownSLine />
                 </MenuButton>
               }
@@ -320,14 +320,14 @@ const Sidebar = ({ usuario }) => {
                       }}
                     />
                     <div style={{ flex: "1" }}>
-                      <span style={{ fontSize: "15px" }}>{usuario.rol}</span>
+                      <span className="capitalize" style={{ fontSize: "15px" }}>{usuario.rol}</span>
                       <span style={{ color: "#999", fontSize: "13px" }}> <br />
                         Ver perfil
                       </span>
                     </div>
 
                   </Link>
-                  : <p className="text-white">Usuario Tenico</p>}
+                  : <p className="text-white">Usuario Tecnico</p>}
               </MenuItem>
               <hr style={{ margin: "4px 0", borderColor: "#ccc" }} />
               {/* Enlaces del menú de perfil */}

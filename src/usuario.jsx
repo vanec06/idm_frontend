@@ -8,7 +8,7 @@ import "aos/dist/aos.css";
 
 const BannerData = {
   title: "INVENTARIO DE MAQUINAS",
-  date: "Fecha de lanzamiento",
+  date: "15-",
   image: cafe,
   title4:
     "Descripcion del programa",

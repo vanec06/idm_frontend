@@ -387,7 +387,7 @@ const Usuario = () => {
                 >
                   <option value="">Selecciona un tipo de estado</option>
                   <option value="activo">Activo</option>
-                  <option value="inactivo">inactivo</option>
+                  <option value="inactivo">Inactivo</option>
 
                 </select>
                 <div className="text-red-500">{errors.map((error) => error.path == 'estado' ? error.msg : '')}</div>
@@ -412,7 +412,7 @@ const Usuario = () => {
                   onChange={(e) => setRol(e.target.value)}
                   className="w-full border border-gray-300 rounded px-3 py-2 mt-1 text-stone-950"
                 >
-                  <option className='text-black' value="">seleccione un rol</option>
+                  <option className='text-black' value="">Seleccione un rol</option>
                   <option value="instructor">Instructor</option>
                   <option value="tecnico">Tecnico</option>
                   <option value="administrador">Administrador</option>
@@ -518,7 +518,7 @@ const Usuario = () => {
                 >
                   <option value="">Selecciona un tipo de estado</option>
                   <option value="activo">Activo</option>
-                  <option value="inactivo">inactivo</option>
+                  <option value="inactivo">Inactivo</option>
 
                 </select>
                 <div className="text-red-500">{errors.map((error) => error.path == 'estado' ? error.msg : '')}</div>

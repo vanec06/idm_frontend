@@ -41,14 +41,15 @@ const Home = () => {
   }, []);
 
   return (
+    <>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
       <CardTicket ticket="total" totalTickets={usuarios} text="Usuarios" lastUsers={lastUsers} />
       <CardTicket ticket="pending" totalTickets={maquinas} text="Máquinas" lastUsers={lastUsers} />
       <CardTicket ticket="inProcess" totalTickets={mantenimientos} text="Mantenimientos" lastUsers={lastUsers} />
       <CardTicket ticket="close" totalTickets={areas} text="Áreas" lastUsers={lastUsers} />
-      
-      <CountUsu lastUsers={lastUsers} />
     </div>
+      <CountUsu lastUsers={lastUsers} />
+    </>
   );
 };
 

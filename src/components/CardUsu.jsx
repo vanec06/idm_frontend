@@ -32,7 +32,7 @@ const CardTicket = (props) => {
   }
 
   return (
-    <div className={`p-8 rounded-xl ${statusClass}`}>
+    <div className={`p-10 rounded-xl ${statusClass}`} style={{ marginLeft: '10px', marginRight: '10px',  margin: '10px'  }}>
       <div className="flex items-center justify-between mb-4">
         <div>{icon}</div>
         <div></div>
