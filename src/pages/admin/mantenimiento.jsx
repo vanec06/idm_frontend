@@ -175,6 +175,7 @@ const Mantenimiento = () => {
       id_maquina: selectedMaquina.value,
       id_usuario: selectedUsuario.value,
       evidencia: evidencia
+      
     };
 
     try {
@@ -373,17 +374,20 @@ const Mantenimiento = () => {
     filter: false,
     selectableRows: 'none', // If you don't want checkboxes for row selection
   }
-
   const handleEvidencia = async (e) => {
     try {
-      const archivo = await ConvertirArchivo(e);
-      setEvidencia(archivo);
+      if (e.target.files.length > 0) {
+        const archivo = await ConvertirArchivo(e);
+        setEvidencia(archivo);
+      } else {
+        setEvidencia(null); // Establecer evidencia como null si no se selecciona ningún archivo
+      }
     } catch (error) {
-      console.log('ERRRO CARGANDO: ', error);
-      alert('Error al cargar el archivo. Contactese con el administrador')
+      console.log('ERROR CARGANDO: ', error);
+      alert('Error al cargar el archivo. Contactese con el administrador');
     }
-  }
-
+  };
+  
   return (
     <div>
       <h2 className="text-black text-3xl font-bold mb-5 px-6 w-full">Lista de Mantenimientos</h2>
