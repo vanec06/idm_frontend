@@ -7,11 +7,11 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 const BannerData = {
-  title: "INVENTARIO DE MAQUINAS",
-  date: "15-",
+  title: "INVENTARIO DE MÁQUINAS",
+  date: "16-04-2024",
   image: cafe,
-  title4:
-    "Descripcion del programa",
+  title2:
+    "IDM es un software de de gestión de inventario para las maquinas y equipos de la Escuela Nacional De café.",
   bgColor: "#2A5D84",
 };
 
