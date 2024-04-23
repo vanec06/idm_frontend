@@ -14,6 +14,8 @@ const Area = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [errors, setErrors] = useState([]);
 
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     listarAreas();
   }, []);
@@ -83,7 +85,7 @@ const Area = () => {
 
   const handleRegistrarArea = async (e) => {
     e.preventDefault();
-
+    setLoading(true)
     const nuevaArea = {
       id_area,
       nombre,
@@ -98,10 +100,11 @@ const Area = () => {
     });
 
     const responseData = await response.json();
-
+    setLoading(false)
     if (responseData.errors) {
       setErrors(responseData.errors);
     } else {
+      setLoading(false)
       closeModal();
       Swal.fire({
         icon: 'success',
@@ -119,6 +122,7 @@ const Area = () => {
   };
 
   const handleActualizarArea = async () => {
+    setLoading(true)
     if (!nombre.trim()) {
       setErrors([{ msg: "El nombre es obligatorio" }]);
       return;
@@ -137,10 +141,11 @@ const Area = () => {
     });
 
     const responseData = await response.json();
-
+    setLoading(false)
     if (responseData.errors) {
       setErrors(responseData.errors);
     } else {
+      setLoading(false)
       closeModal();
       Swal.fire({
         icon: 'success',
@@ -200,8 +205,8 @@ const Area = () => {
     responsive: 'standard',
     print: false,
     viewColumns: false,
-    download:false,
-    filter:false,
+    download: false,
+    filter: false,
     selectableRows: 'none', // If you don't want checkboxes for row selection
   };
 
@@ -265,11 +270,21 @@ const Area = () => {
               <div className="text-red-500">{errors.length > 0 ? errors[0].msg : ''}</div>
               <div className="flex justify-between">
                 <button
+                  disabled={loading}
                   type="button"
                   className='text-white font-bold hover:bg-blue-800 w-40 h-10 bg-blue-600 rounded'
                   onClick={handleActualizarArea}
                 >
-                  Actualizar area
+                  {loading == true ?
+                    <div
+                      class="inline-block h-6 w-6 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-primary motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                      role="status">
+                      <span
+                        class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+                      >Loading...</span
+                      >
+                    </div> : 'Actualizar'
+                  }
                 </button>
                 <button
                   className="bg-gray-500 hover:bg-gray-800 text-white font-bold py-2 px-8 rounded"
@@ -301,11 +316,21 @@ const Area = () => {
               </div>
               <div className="flex justify-between">
                 <button
+                  disabled={loading}
                   type="button"
                   className='text-white font-bold hover:bg-green-800 w-40 h-10 bg-green-600 rounded'
                   onClick={handleRegistrarArea}
                 >
-                  Registrar
+                  {loading == true ?
+                    <div
+                      class="inline-block h-6 w-6 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-primary motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                      role="status">
+                      <span
+                        class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+                      >Loading...</span
+                      >
+                    </div> : 'Registrar'
+                  }
                 </button>
                 <button
                   className="bg-gray-500 hover:bg-gray-800 text-white font-bold py-2 px-8 rounded"

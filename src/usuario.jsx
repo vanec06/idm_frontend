@@ -11,7 +11,7 @@ const BannerData = {
   date: "16-04-2024",
   image: cafe,
   title2:
-    "IDM es un software de de gestión de inventario para las maquinas y equipos de la Escuela Nacional De café.",
+    "IDM es un software de gestión de inventario para las maquinas y equipos de la Escuela Nacional De café.",
   bgColor: "#2A5D84",
 };
 

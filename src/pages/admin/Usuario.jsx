@@ -23,6 +23,8 @@ const Usuario = () => {
 
   const [errors, setErrors] = useState([]);
 
+  const [loading, setloading] = useState(false);
+
   useEffect(() => {
     listarUsuarios();
   }, []);
@@ -99,6 +101,7 @@ const Usuario = () => {
   };
 
   const handleRegistrarUsuario = async () => {
+    setloading(true)
     try {
       const nuevoUsuario = {
         identificacion,
@@ -118,18 +121,20 @@ const Usuario = () => {
         body: JSON.stringify(nuevoUsuario),
       });
       const responseData = await response.json();
-  
+
+      setloading(false)
       if (responseData.errors) {
         setErrors(responseData.errors);
-      } 
-      else if(responseData.status=='existente'){
+      }
+      else if (responseData.status == 'existente') {
         Swal.fire({
           icon: 'error',
           title: 'Usuario Existente',
         });
       }
-      
+
       else {
+        setloading(false)
         closeModal();
         Swal.fire({
           icon: 'success',
@@ -162,7 +167,7 @@ const Usuario = () => {
 
 
   const handleActualizarUsuario = async () => {
-
+    setloading(true)
     try {
       const usuarioActualizado = {
         id_usuario: selectedUsuario.id_usuario,
@@ -185,10 +190,11 @@ const Usuario = () => {
       });
 
       const responseData = await response.json();
-
+      setloading(false)
       if (responseData.errors) {
         setErrors(responseData.errors);
       } else {
+        setloading(false)
         listarUsuarios();
         closeModal();
         Swal.fire({
@@ -236,10 +242,10 @@ const Usuario = () => {
     { name: 'telefono', label: 'Teléfono' },
     { name: 'correo', label: 'Correo Electrónico' },
     { name: 'estado', label: 'Estado' },
-    { name: 'rol', label: 'Rol'},
+    { name: 'rol', label: 'Rol' },
     { name: 'contraseña', label: 'Contraseña', options: { display: 'false' } }, //este es para que no aparezca en la tabla//
 
-    
+
     {
       name: 'acciones',
       label: 'Acciones',
@@ -266,8 +272,8 @@ const Usuario = () => {
     responsive: 'standard',
     print: false,
     viewColumns: false,
-    download:false,
-    filter:false,
+    download: false,
+    filter: false,
     selectableRows: 'none', // If you don't want checkboxes for row selection
   };
 
@@ -430,11 +436,21 @@ const Usuario = () => {
             </div>
             <div className="flex justify-between">
               <button
+                disabled={loading}
                 type="button"
                 className="text-white font-bold hover:bg-blue-800 w-40 h-10 bg-blue-600 rounded"
                 onClick={handleActualizarUsuario}
               >
-                Actualizar Usuario
+                {loading == true ?
+                  <div
+                    class="inline-block h-6 w-6 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-primary motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                    role="status">
+                    <span
+                      class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+                    >Loading...</span
+                    >
+                  </div> : 'Actualizar'
+                }
               </button>
               <button
                 className="bg-gray-500 hover:bg-gray-800 text-white font-bold py-2 px-8 rounded "
@@ -549,11 +565,22 @@ const Usuario = () => {
             </div>
             <div className="flex justify-between">
               <button
+                disabled={loading}
                 type="button"
                 className="text-white font-bold hover:bg-green-800 w-40 h-10 bg-green-600 rounded "
                 onClick={handleRegistrarUsuario}
               >
-                Registrar
+                {loading == true ?
+                  <div
+                    class="inline-block h-6 w-6 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-primary motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                    role="status">
+                    <span
+                      class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+                    >Loading...</span
+                    >
+                  </div> : 'Registro'
+                }
+
               </button>
               <button
                 className="bg-gray-500 hover:bg-gray-800 text-white font-bold py-2 px-8 rounded"

@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 
 const Profile = ({ usuario }) => {
     const [info, setInfo] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         buscarUsuario();
@@ -45,6 +45,7 @@ const Profile = ({ usuario }) => {
     const actualizarDatos = async (e) => {
         e.preventDefault();
         try {
+            setLoading(true);
             const datos = {
                 identificacion: identificacion,
                 nombres: nombre,
@@ -56,7 +57,7 @@ const Profile = ({ usuario }) => {
             }
             const resp = await Api.put(`/usuario/actualizar/${id}`, datos);
             console.log(resp.data.status);
-
+            setLoading(false);
             if (resp.data.status == true) {
                 Swal.fire({
                     icon: 'success',
@@ -70,6 +71,7 @@ const Profile = ({ usuario }) => {
             }
 
         } catch (error) {
+            setLoading(false);
             console.log(error);
         }
 
@@ -145,7 +147,19 @@ const Profile = ({ usuario }) => {
                             </div>
 
                             <div className="col-sm-2">
-                                <button className="btn btn-primary" onClick={(e) => actualizarDatos(e)}>Guardar</button>
+                                <button disabled={loading} className="btn btn-primary" onClick={(e) => actualizarDatos(e)}>
+                                    {loading == true ?
+                                        <div
+                                            class="inline-block h-6 w-6 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-primary motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                                            role="status">
+                                            <span
+                                                class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+                                            >Loading...</span
+                                            >
+                                        </div> : 'Guardar'
+                                    }
+
+                                </button>
                             </div>
                         </div>
                     </div>

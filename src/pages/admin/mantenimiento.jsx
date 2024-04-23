@@ -35,6 +35,7 @@ const Mantenimiento = () => {
   const [comentarios, setComentarios] = useState('');
   const [evidencia, setEvidencia] = useState(null);
 
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     listarMantenimientos();
@@ -89,6 +90,7 @@ const Mantenimiento = () => {
   };
 
   const handleNotificarMantenimiento = async () => {
+    setLoading(true)
     const nuevaNotificacion = {
       fecha,
       comentarios,
@@ -105,7 +107,7 @@ const Mantenimiento = () => {
       });
 
       const responseData = await response.json();
-
+      setLoading(false)
       if (response.ok) {
         setModalNoti(false);
         Swal.fire({
@@ -116,6 +118,7 @@ const Mantenimiento = () => {
         setErrors(responseData.errors || ['Error al registrar la notificación']);
       }
     } catch (error) {
+      setLoading(false)
       console.error('Error al registrar la notificación:', error);
       setErrors(['Error al registrar la notificación']);
     }
@@ -166,6 +169,7 @@ const Mantenimiento = () => {
   };
 
   const handleRegistrarMantenimiento = async () => {
+    setLoading(true)
     const nuevoMantenimiento = {
       id_mantenimiento,
       fecha_mantenimiento,
@@ -175,7 +179,7 @@ const Mantenimiento = () => {
       id_maquina: selectedMaquina.value,
       id_usuario: selectedUsuario.value,
       evidencia: evidencia
-      
+
     };
 
     try {
@@ -188,7 +192,7 @@ const Mantenimiento = () => {
       });
 
       const responseData = await response.json();
-
+      setLoading(false)
       if (response.ok) {
         listarMantenimientos();
         closeModal();
@@ -203,12 +207,14 @@ const Mantenimiento = () => {
 
       console.log("DATA REGISTER: ", responseData.errors);
     } catch (error) {
+      setLoading(false)
       console.error('Error al registrar mantenimiento:', error);
       setErrors(['Error al registrar mantenimiento']);
     }
   };
 
   const handleActualizarMantenimiento = async () => {
+    setLoading(true)
     console.log('xd: ', fecha_mantenimiento);
     const mantenimientoActualizado = {
       id_mantenimiento: selectedMantenimiento.id_mantenimiento,
@@ -232,7 +238,7 @@ const Mantenimiento = () => {
       });
 
       const responseData = await response.json();
-
+      setLoading(false)
       if (response.ok) {
         listarMantenimientos();
         closeModal();
@@ -246,6 +252,7 @@ const Mantenimiento = () => {
 
       console.log("DATA UPDATE: ", responseData.errors);
     } catch (error) {
+      setLoading(false)
       console.error('Error al actualizar mantenimiento:', error);
       setErrors(['Error al actualizar mantenimiento']);
     }
@@ -387,7 +394,7 @@ const Mantenimiento = () => {
       alert('Error al cargar el archivo. Contactese con el administrador');
     }
   };
-  
+
   return (
     <div>
       <h2 className="text-black text-3xl font-bold mb-5 px-6 w-full">Lista de Mantenimientos</h2>
@@ -523,11 +530,21 @@ const Mantenimiento = () => {
               </div>
               <div className="flex justify-between">
                 <button
+                  disabled={loading}
                   type="button"
                   className='text-white font-bold hover:bg-blue-800 w-48 h-14 bg-blue-600 rounded'
                   onClick={handleActualizarMantenimiento}
                 >
-                  Actualizar
+                  {loading == true ?
+                    <div
+                      class="inline-block h-6 w-6 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-primary motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                      role="status">
+                      <span
+                        class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+                      >Loading...</span
+                      >
+                    </div> : 'Actualizar'
+                  }
                 </button>
                 <button
                   className="bg-gray-500 hover:bg-gray-800 text-white font-bold py-2 px-8 rounded"
@@ -608,7 +625,7 @@ const Mantenimiento = () => {
                   id="id_maquina"
                   value={selectedMaquina}
                   onChange={(option) => setSelectedMaquina(option)}
-                  options={maquinas.map(maquina => ({ value: maquina.id_maquina,  label: maquina.nombre_maquina + ' - ' + maquina.placa, }))}
+                  options={maquinas.map(maquina => ({ value: maquina.id_maquina, label: maquina.nombre_maquina + ' - ' + maquina.placa, }))}
                   className="w-full mt-1 text-black"
                   placeholder="Selecciona una máquina"
                 />
@@ -634,11 +651,21 @@ const Mantenimiento = () => {
               </div>
               <div className="flex justify-between">
                 <button
+                  disabled={loading}
                   type="button"
                   className="text-white font-bold hover:bg-green-800 w-40 h-10 bg-green-600 rounded"
                   onClick={handleRegistrarMantenimiento}
                 >
-                  Registrar
+                  {loading == true ?
+                    <div
+                      class="inline-block h-6 w-6 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-primary motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                      role="status">
+                      <span
+                        class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+                      >Loading...</span
+                      >
+                    </div> : 'Registrar'
+                  }
                 </button>
                 <button
                   className="bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded mt-4bg-gray-500 hover:bg-gray-800 text-white font-bold py-2 px-8 rounded"
@@ -721,11 +748,21 @@ const Mantenimiento = () => {
             </div>
             <div className="flex justify-between">
               <button
+                disabled={loading} F
                 type="button"
                 className='text-white font-bold hover:bg-green-800 w-40 h-10 bg-green-600 rounded'
                 onClick={handleNotificarMantenimiento}
               >
-                Registrar
+                {loading == true ?
+                  <div
+                    class="inline-block h-6 w-6 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-primary motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                    role="status">
+                    <span
+                      class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+                    >Loading...</span
+                    >
+                  </div> : 'Registrar'
+                }
               </button>
 
               <button

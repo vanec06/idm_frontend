@@ -23,6 +23,8 @@ const Nmantenimiento = () => {
   const [errors, setErrors] = useState([]);
   const [estado, setEstado] = useState("");
 
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     listarNotificaciones();
     listarMaquinas();
@@ -75,12 +77,15 @@ const Nmantenimiento = () => {
   const openModal = (notificacion_mantenimiento) => {
     setSelectedNotificacion(notificacion_mantenimiento);
     setModalIsOpen(true);
-    console.log("DATA: ", notificacion_mantenimiento);
+    console.log("DATA: ", notificacion_mantenimiento.fecha);
 
     if (notificacion_mantenimiento) {
+      const date = notificacion_mantenimiento.fecha;
+      const dateSplit = date.split('T');
+
       setidMaquina(notificacion_mantenimiento.id_maquina);
       setIdNotificacion(notificacion_mantenimiento.id_notificacion);
-      setFecha(notificacion_mantenimiento.fecha);
+      setFecha(dateSplit[0]);
       setComentarios(notificacion_mantenimiento.comentarios);
       setTipoMantenimiento(notificacion_mantenimiento.tipo_mantenimiento);
       setSelectedMaquina({
@@ -109,6 +114,7 @@ const Nmantenimiento = () => {
   };
 
   const handleNotificarMantenimiento = async () => {
+    setLoading(true)
     const nuevaNotificacion = {
       id_notificacion,
       fecha,
@@ -130,6 +136,7 @@ const Nmantenimiento = () => {
 
       const responseData = await response.json();
 
+      setLoading(false)
       if (response.ok) {
         listarNotificaciones();
         closeModal();
@@ -141,6 +148,7 @@ const Nmantenimiento = () => {
           "Notificación de mantenimiento registrada correctamente!"
         );
       } else {
+        setLoading(false)
         setErrors(
           responseData.errors || ["Error al registrar la notificación"]
         );
@@ -152,6 +160,7 @@ const Nmantenimiento = () => {
   };
 
   const handleActualizarNotificacion = async () => {
+    setLoading(true)
     const notificacionActualizado = {
       id_notificacion: selectedNotificacion.id_notificacion,
       fecha,
@@ -176,6 +185,7 @@ const Nmantenimiento = () => {
 
       const responseData = await response.json();
 
+      setLoading(false)
       if (response.ok) {
         listarNotificaciones();
         closeModal();
@@ -187,6 +197,7 @@ const Nmantenimiento = () => {
           "Notificación de notificación actualizada correctamente!"
         );
       } else {
+        setLoading(false)
         setErrors(
           responseData.errors || ["Error al actualizar la notificación"]
         );
@@ -431,17 +442,27 @@ const Nmantenimiento = () => {
                   placeholder="Selecciona una máquina"
                 />
                 <div className="text-red-500">{errors.map((error) => error.path === "id_maquina" ? error.msg : ""
-                  )}
+                )}
                 </div>
               </div>
 
               <div className="flex justify-between">
                 <button
+                  disabled={loading}
                   type="button"
                   className="text-white font-bold hover:bg-blue-800 w-40 h-10 bg-blue-600 rounded"
                   onClick={handleActualizarNotificacion}
                 >
-                  Actualizar
+                  {loading == true ?
+                    <div
+                      class="inline-block h-6 w-6 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-primary motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                      role="status">
+                      <span
+                        class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+                      >Loading...</span
+                      >
+                    </div> : 'Actualizar'
+                  }
                 </button>
                 <button
                   className="bg-gray-500 hover:bg-gray-800 text-white font-bold py-2 px-8 rounded"
@@ -476,7 +497,7 @@ const Nmantenimiento = () => {
                 <div className="text-red-500">{errors.map((error) => error.path == 'fecha' ? error.msg : '')}</div>
 
               </div>
-              
+
               <div className="mb-4">
                 <label
                   htmlFor="comentarios"
@@ -494,7 +515,7 @@ const Nmantenimiento = () => {
                 />
                 <div className="text-red-500">{errors.map((error) => error.path == 'comentarios' ? error.msg : '')}</div>
               </div>
-              
+
 
               <div className="mb-4">
                 <label
@@ -516,7 +537,7 @@ const Nmantenimiento = () => {
                 </select>
                 <div className="text-red-500">{errors.map((error) => error.path == 'tipo_mantenimiento' ? error.msg : '')}</div>
               </div>
-              
+
 
               <div className="mb-4 ">
                 <label
@@ -544,11 +565,21 @@ const Nmantenimiento = () => {
               </div>
               <div className="flex justify-between">
                 <button
+                  disabled={loading}
                   type="button"
                   className="text-white font-bold hover:bg-green-800 w-40 h-10 bg-green-600 rounded"
                   onClick={handleNotificarMantenimiento}
                 >
-                  Registrar
+                  {loading == true ?
+                    <div
+                      class="inline-block h-6 w-6 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-primary motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                      role="status">
+                      <span
+                        class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+                      >Loading...</span
+                      >
+                    </div> : 'Registrar'
+                  }
                 </button>
                 <button
                   className="bg-gray-500 hover:bg-gray-800 text-white font-bold py-2 px-8 rounded"
